@@ -45,7 +45,7 @@
                             <!-- /.row -->
 
                             <div class="row mt-30">
-                                <div class="col-md-4">
+                                <div class="col-md-5">
                                     <div class="panel border-primary no-border border-3-top">
                                         <div class="panel-heading">
                                             <div class="panel-title">
@@ -155,7 +155,7 @@
                                 </div>
                                 <!-- /.col-md-3 -->
 
-                                <div class="col-md-8">
+                                <div class="col-md-7">
 
                                     <div class="row mb-30">
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -185,7 +185,7 @@
                                       <?php
                                         $bio = $result->bio; 
                                         if($bio == ""){
-                                          echo"Kosong Gan";
+                                          echo"<br/>";
                                         }else{
                                           ?> <p class="sub-title"><?php echo $result->bio;?></p> <?php
                                         }
@@ -206,7 +206,7 @@
                                 <div class="row">
                                   
                                   <div class="col-lg-6">
-                                    <div class="bg-white p-15" style="margin-top:10px;">
+                                    <div class="bg-white p-15" style="margin-top:10px; margin-bottom:30px;">
                                       <div role="tabpanel" id="home2">
                                         Branches
                                         <hr/>
