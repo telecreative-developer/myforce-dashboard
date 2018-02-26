@@ -55,9 +55,37 @@
                                         <div class="panel-body">
                                             <div class="row">
                                                 <div class="col-md-8 col-md-offset-2">
-                                                    <img src="<?php echo $result->avatar;?>" alt="User Avatar" class="img-circle img-responsive">
+                                                    <?php 
+                                                      if($result->avatar == ""){
+                                                        if($result->gender == '1'){
+                                                        ?>    
+                                                          <center>
+                                                            <div class="outline-product" style="background: url('http://www.tlcteignmouth.co.uk/wp-content/uploads/2015/06/default-avatar_man.png')center no-repeat; background-size:cover; width:200px; border-radius:100%; height:200px;">
+                                                            </div>  
+                                                          </center>
+                                                        <?php 
+                                                          }else{
+                                                            ?>
+                                                            <center>
+                                                              <div class="outline-product" style="background: url('http://usvirtualcareers.com/wp-content/uploads/2016/06/default-avatar_women.png')center no-repeat; background-size:cover; width:200px; border-radius:100%; height:200px;">
+                                                              </div>  
+                                                            </center>
+                                                        <?php  
+                                                        }
+
+                                                      }else{  
+                                                      ?> 
+                                                      <center>
+                                                        <div class="outline-product" style="background: url('<?php echo $result->avatar;?>')center no-repeat; background-size:cover; width:200px; border-radius:100%; height:200px;">
+                                                        </div>  
+                                                      </center>
+                                                    
+                                                    <?php
+                                                    }
+                                                    ?>
+                                                    
                                                     <div class="text-center">
-                                                        <button type="button" class="btn btn-primary btn-xs btn-labeled mt-10">Edit Users<span class="btn-label btn-label-right"><i class="fa fa-pencil"></i></span></button>
+                                                        <button type="button" class="btn btn-primary btn-xs btn-labeled mt-10">Edit Sales<span class="btn-label btn-label-right"><i class="fa fa-pencil"></i></span></button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -176,16 +204,7 @@
                                   </div>
                                 <!-- /.col-md-9 -->
                                 <div class="row">
-                                  <div class="col-lg-6">
-                                    <div class="tab-content bg-white p-15" style="margin-top:10px;">
-                                      <div role="tabpanel" class="tab-pane active" id="home2">
-                                        Regions
-                                        <hr/>
-                                        <b>Region :</b> <?php echo $result->region;?>
-                                        
-                                      </div>
-                                    </div>
-                                  </div>
+                                  
                                   <div class="col-lg-6">
                                     <div class="bg-white p-15" style="margin-top:10px;">
                                       <div role="tabpanel" id="home2">

@@ -23,7 +23,7 @@
                         <div class="container-fluid">
                             <div class="row page-title-div">
                                 <div class="col-md-12">
-                                    <h2 class="title">Regions</h2>
+                                    <h2 class="title">Questions</h2>
                                     <p class="sub-title">One stop solution for perfect admin dashboard!</p>
                                 </div>
                                 <!-- /.col-md-6 text-right -->
@@ -33,8 +33,8 @@
                                 <div class="col-md-12">
                                     <ul class="breadcrumb">
             							              <li><a href="<?php echo base_url();?>dashboard"><i class="fa fa-home"></i> Home</a></li>
-                                        <li><a href="<?php echo base_url();?>branches">Branches</li></a>
-                                        <li class="active">Add Branches</li>
+                                        <li><a href="<?php echo base_url();?>questions">Questions</li></a>
+                                        <li class="active">Add Questions</li>
             						            </ul>
                                 </div>
                             </div>
@@ -58,18 +58,31 @@
                                         <div class="panel">
                                             <div class="panel-heading">
                                                 <div class="panel-title">
-                                                    <h5>Input Your Branches</small></h5>
+                                                    <h5>Input Your Questions</small></h5>
                                                 </div>
                                             </div>
                                             <div class="panel-body">
-
-                                                <form method="POST" action="<?php echo base_url()?>insertbranches" class="form-horizontal">
+                                                <form action="<?php echo base_url()?>insertquestions" method="POST" class="form-horizontal" enctype="multipart/form-data">
                                                 	<div class="form-group">
-                                                		<label for="text1" class="col-sm-2 control-label">Branches</label>
+                                                		<label for="text1" class="col-sm-2 control-label">Questions</label>
                                                 		<div class="col-sm-10">
-                                                			<input type="text" name="title" class="form-control" id="title" placeholder="Input your title" required="ON">
-                                                		</div>
-                                                	</div>
+                                                			<input type="text" name="questions" class="form-control" id="questions" placeholder="Questions">
+                                                    </div>
+                                                  </div>
+
+                                                  <div class="form-group">
+                                                  <label for="text1" class="col-sm-2 control-label">Step</label>
+                                                    <div class="col-sm-10">  
+                                                      <select name="step" class="form-control">
+                                                        <option value="1">Step 1 </option>
+                                                        <option value="2">Step 2</option>
+                                                        <option value="3">Step 3</option>
+                                                        <option value="4">Step 4</option>
+                                                        <option value="5">Step 5</option>
+                                                        <option value="6">Step 6</option>
+                                                      </select>
+                                                    </div>
+                                                  </div>
                                                     
                                                 	<div class="form-group">
                                                 		<div class="col-sm-offset-2 col-sm-10">

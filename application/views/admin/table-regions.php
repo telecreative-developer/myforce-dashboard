@@ -75,9 +75,9 @@
                                                 <table id="example" class="display table-responsive table-bordered" cellspacing="0" width="100%">
                                                     <thead>
                                                         <tr>
-                                                            <th>No</th>
+                                                            <th width="3%">No</th>
                                                             <th>Region</th>
-                                                            <th>Action</th>
+                                                            <th width="3%">Action</th>
                                                         </tr>
                                                     </thead>
                                                     

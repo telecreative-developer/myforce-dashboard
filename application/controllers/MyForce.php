@@ -17,6 +17,51 @@ class MyForce extends CI_Controller {
 		$this->load->view('admin/dashboard');
   }
   
+  public function targets()
+	{
+    $data['targets']  = $this->ModelMyForce->LoadTargets()->result();
+		$this->load->view('admin/table-targets',$data);
+  }
+
+  public function editTargets()
+	{
+    $id = $this->uri->segment(2);
+    $data['targets'] = $this->ModelMyForce->LoadTargetsById($id)->result();
+		$this->load->view('admin/edittargets',$data);
+  }
+
+  public function updateTargets() {
+    $datenow = date("Y-m-d");
+    $timenow = date("H:i:s");
+  
+    $id = $this->uri->segment(2);
+    $target_month             = $this->input->post('target_month');
+    $target_year              = $this->input->post('target_year');
+    $target_revenue_month     = $this->input->post('target_revenue_month');
+    $target_revenue_year      = $this->input->post('target_revenue_year');
+    $year                     = $this->input->post('year');
+    
+		$data = array(
+      'target_month'           => $target_month,
+      'target_year'            => $target_year,
+      'target_revenue_month'   => $target_revenue_month,
+      'target_revenue_year'    => $target_revenue_year,
+      'year'                   => $year,
+      'updatedAt'		           => $datenow." ".$timenow
+		);
+		
+		$where = array(
+			'id_target' => $id
+    );
+    
+    $this->ModelMyForce->updateTargetsById($where,$data,'targets');
+		echo ("<script LANGUAGE='JavaScript'>
+     window.alert('Update Data');
+     window.location.href='../targets';
+     </script>");
+    
+  }
+  
   public function events()
 	{
     $data['events']  = $this->ModelMyForce->LoadEvents()->result();
@@ -456,6 +501,14 @@ class MyForce extends CI_Controller {
     //  </script>");
   }
 
+  public function deleteSales() {
+    $id = $this->uri->segment(2);
+    $this->ModelMyForce->deleteSales($id);
+    echo ("<script LANGUAGE='JavaScript'>
+    window.alert('Delete Data');
+    window.location.href='../sales';
+    </script>");
+  }
 
   public function regions()
 	{
@@ -596,6 +649,192 @@ class MyForce extends CI_Controller {
     window.location.href='../branches';
     </script>");
   }
+
+  public function teams()
+	{
+    $data['teams']  = $this->ModelMyForce->LoadTeams()->result();
+		$this->load->view('admin/table-teams',$data);
+  }
+
+  public function addteams()
+	{
+    $data['sales']      = $this->ModelMyForce->LoadSales()->result();
+    $data['pipelines']  = $this->ModelMyForce->LoadPipelines()->result();
+    $data['branch']     = $this->ModelMyForce->loadBranches()->result();
+    $data['customers']  = $this->ModelMyForce->LoadCustomers()->result();
+		$this->load->view('admin/addteams',$data);
+  }
+
+  public function insertTeams(){
+    $id_branch           = $this->input->post('id_branch');
+    $id_pipeline         = $this->input->post('id_pipeline');
+    $id_customer         = $this->input->post('id_customer');
+    $id_sales            = $this->input->post('id_sales');
+
+    $datenow = date("Y-m-d");
+    $timenow = date("h:i:s");
+
+    $regions = array(
+      'id_branch' 			      => $id_branch,
+      'id_pipeline' 			    => $id_pipeline,
+      'id_customer' 			    => $id_customer,
+      'id'      			        => $id_sales,
+      'createdAt'		          => $datenow." ".$timenow,
+      'updatedAt'		          => $datenow." ".$timenow
+    );
+
+     $this->ModelMyForce->insertTeams($regions); 
+     echo ("<script LANGUAGE='JavaScript'>
+     window.alert('Success Data');
+     window.location.href='teams';
+     </script>");
+  }
+
+  public function editTeams()
+	{
+    $id = $this->uri->segment(2);
+    $query = $this->db->query("SELECT * FROM team_updates WHERE id_team_update = $id");
+    $row = $query->row();
+
+    $id_pipeline = $row->id_pipeline;
+    $id_sales = $row->id;
+    $id_customer = $row->id_customer;
+
+    $data['teams']      = $this->ModelMyForce->LoadTeamsById($id)->result();
+    $data['pipelines']  = $this->ModelMyForce->LoadPipelinesNotById($id_pipeline)->result();
+    $data['customers']  = $this->ModelMyForce->loadCustomersNotById($id_customer)->result();
+    $data['sales']      = $this->ModelMyForce->loadSalesNotById($id_sales)->result();
+    
+		$this->load->view('admin/editteams',$data);
+  }
+
+  public function updateTeams() {
+    $datenow = date("Y-m-d");
+    $timenow = date("H:i:s");
+  
+    $id = $this->uri->segment(2);
+    $id_branch            = $this->input->post('id_branch');
+    $id_pipeline          = $this->input->post('id_pipeline');
+    $id_customer          = $this->input->post('id_customer');
+    $id_sales             = $this->input->post('id_sales');
+    
+		$data = array(
+      'id_branch'         => $id_branch,
+      'id_pipeline'       => $id_pipeline,
+      'id_customer'       => $id_customer,
+      'id'                => $id_sales,
+      'updatedAt'		      => $datenow." ".$timenow
+		);
+		
+		$where = array(
+			'id_team_update' => $id
+    );
+    
+    $this->ModelMyForce->updateTeamsById($where,$data,'team_updates');
+		echo ("<script LANGUAGE='JavaScript'>
+     window.alert('Update Data');
+     window.location.href='../teams';
+     </script>");
+  }
+  
+  public function deleteTeams() {
+    $id = $this->uri->segment(2);
+    $this->ModelMyForce->deleteTeams($id);
+    echo ("<script LANGUAGE='JavaScript'>
+    window.alert('Delete Data');
+    window.location.href='../teams';
+    </script>");
+  }
+
+  public function questions()
+	{
+    $data['questions']  = $this->ModelMyForce->loadQuestions()->result();
+		$this->load->view('admin/table-questions',$data);
+  }
+
+  public function addquestions()
+	{
+		$this->load->view('admin/addquestions');
+  }
+  
+  public function insertQuestions(){
+    $question     = $this->input->post('questions');
+    $step         = $this->input->post('step');
+
+    $datenow = date("Y-m-d");
+    $timenow = date("h:i:s");
+
+    $questions = array(
+      'question' 			  => $question,
+      'step' 			      => $step,
+      'createdAt'		    => $datenow." ".$timenow,
+      'updatedAt'		    => $datenow." ".$timenow
+    );
+
+     $this->ModelMyForce->insertQuestions($questions); 
+     echo ("<script LANGUAGE='JavaScript'>
+     window.alert('Success Data');
+     window.location.href='questions';
+     </script>"); 
+  }
+
+  public function editQuestions()
+	{
+    $id = $this->uri->segment(2);
+    $data['questions'] = $this->ModelMyForce->LoadQuestionsById($id)->result();
+		$this->load->view('admin/editquestions',$data);
+  }
+
+  public function updateQuestions() {
+    $datenow = date("Y-m-d");
+    $timenow = date("H:i:s");
+  
+    $id = $this->uri->segment(2);
+    $question         = $this->input->post('questions');
+    $step             = $this->input->post('step');
+    
+		$data = array(
+      'question'       => $question,
+      'step'           => $step,
+      'updatedAt'		   => $datenow." ".$timenow
+		);
+		
+		$where = array(
+			'id_question' => $id
+    );
+    
+    $this->ModelMyForce->updateQuestionsById($where,$data,'questions');
+		echo ("<script LANGUAGE='JavaScript'>
+     window.alert('Update Data');
+     window.location.href='../questions';
+     </script>");
+	}
+
+  public function deleteQuestions() {
+    $id = $this->uri->segment(2);
+    $this->ModelMyForce->deleteQuetions($id);
+    echo ("<script LANGUAGE='JavaScript'>
+    window.alert('Delete Data');
+    window.location.href='../questions';
+    </script>");
+  }
+
+
+  public function answers()
+	{
+    $data['answers']  = $this->ModelMyForce->loadAnswers()->result();
+		$this->load->view('admin/table-answers',$data);
+  }
+
+  public function deleteAnswers() {
+    $id = $this->uri->segment(2);
+    $this->ModelMyForce->deleteAnswers($id);
+    echo ("<script LANGUAGE='JavaScript'>
+    window.alert('Delete Data');
+    window.location.href='../answers';
+    </script>");
+  }
+  
 
   public Function logout(){
 		$this->session->sess_destroy();

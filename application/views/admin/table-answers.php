@@ -38,7 +38,7 @@
                                 <div class="col-md-12">
                                     <ul class="breadcrumb">
                                       <li><a href="<?php echo base_url();?>dashboard"><i class="fa fa-home"></i> Home</a></li>
-                                      <li class="active">Sales</li>
+                                      <li class="active">Answers</li>
                                     </ul>
                                 </div>
                             </div>
@@ -66,23 +66,19 @@
                                         <div class="panel">
                                             <div class="panel-heading">
                                                 <div class="panel-title">
-                                                    <h5>Sales </h5>
-                                                    <a href="<?php echo base_url()?>addsales"><button type="button" class="btn btn-primary btn-xs btn-labeled">Add Sales <i class="fa fa-plus"></i></button></a>
+                                                    <h5>Answers </h5>
                                                 </div>
                                             </div>
                                             <div class="panel-body p-20">
+
                                                 <table id="example" class="display table-responsive table-bordered" cellspacing="0" width="100%">
                                                     <thead>
                                                         <tr>
                                                             <th width="3%">No</th>
-                                                            <th width="5%">Picture</th>
-                                                            <th>Name</th>
-                                                            <th>Username / Email</th>
-                                                            <th>Phone</th>
-                                                            <th>Bank</th>
-                                                            <th>No Rek</th>
-                                                            <th>Address</th>
-                                                            <th>Points</th>
+                                                            <th width="20%">Questions</th>
+                                                            <th width="20%">Answers</th>
+                                                            <th width="20%">Pipeline</th>
+                                                            <th width="20%">Users</th>
                                                             <th width="3%">Action</th>
                                                         </tr>
                                                     </thead>
@@ -90,43 +86,19 @@
                                                     <tbody>
                                                         <?php
                                                             $no = 1; 
-                                                            foreach ($sales as $result) {
+                                                            foreach ($answers as $result) {
                                                         ?>
                                                         <tr>
                                                             <td><?php echo $no;?></td>
+                                                            <td><?php echo $result->question;?></td>
+                                                            <td><?php echo $result->answer;?></td>
+                                                            <td><?php echo $result->pipeline;?></td>
                                                             <td>
-                                                              <?php 
-                                                                if($result->avatar == ""){
-                                                                  if($result->gender == '1'){
-                                                                  ?><img src="http://www.tlcteignmouth.co.uk/wp-content/uploads/2015/06/default-avatar_man.png" width="100%"/>
-                                                                  <?php 
-                                                                    }else{
-                                                                      ?><img src="http://usvirtualcareers.com/wp-content/uploads/2016/06/default-avatar_women.png" width="100%"/>
-                                                                  <?php  
-                                                                  }
-
-                                                                }else{
-                                                                
-                                                                ?> <img src="<?php echo $result->avatar;?>" width="100%"/>
-                                                                
-                                                              <?php
-                                                                }
-                                                              ?>
-                                                            </td>
-                                                            <td><?php echo $result->first_name;?> <?php echo $result->last_name;?></td>
-                                                            <td>
-                                                              <a href="pagesprofile/<?php echo $result->id?>" span style="color:blue;"><?php echo $result->username;?></a>
-                                                              <br/>
+                                                              <a href="<?php echo base_url();?>pagesprofile/<?php echo $result->id?>" span style="color:blue;"><?php echo $result->username;?></a> <br/>
                                                               <?php echo $result->email;?>
                                                             </td>
-                                                            <td><?php echo $result->phone;?></td>
-                                                            <td><?php echo $result->bank_name;?></td>
-                                                            <td><?php echo $result->no_rek;?></td>
-                                                            <td><?php echo $result->address;?></td>
-                                                            <td><?php echo $result->point;?> Points</td>
                                                             <td>
-                                                                <a href="<?php echo base_url();?>editevents/<?php echo $result->id;?>"><button type="button" class="btn btn-primary btn-xs btn-labeled"><i class="fa fa-pencil"></i></button></a>
-                                                                <a onclick="javascript:return confirm('Delete ?')" href="<?php echo base_url();?>deleteSales/<?php echo $result->id;?>"><button type="button" class="btn btn-danger btn-xs btn-labeled"><i class="fa fa-remove"></i></button></a>
+                                                              <a onclick="javascript:return confirm('Delete ?')" href="<?php echo base_url();?>deleteAnswers/<?php echo $result->id_answer;?>"><button type="button" class="btn btn-danger btn-xs btn-labeled"><i class="fa fa-remove"></i></button></a>
                                                             </td>
                                                         </tr>
                                                         <?php 

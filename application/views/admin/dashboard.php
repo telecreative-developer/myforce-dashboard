@@ -40,18 +40,20 @@
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                                        <a class="dashboard-stat bg-primary" href="#">
-                                            <span class="number counter">1,411</span>
-                                            <span class="name">Comments</span>
+                                        <a class="dashboard-stat bg-primary" href="<?php echo base_url()?>questions">
+                                            <?php $query = $this->db->query("SELECT * FROM questions"); ?>
+                                            <span class="number counter"><?php echo $query->num_rows();?></span>
+                                            <span class="name">Questions</span>
                                             <span class="bg-icon"><i class="fa fa-comments"></i></span>
                                         </a>
                                     </div>
 
                                     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                                         <a class="dashboard-stat bg-danger" href="#">
-                                            <span class="number counter">322</span>
-                                            <span class="name">Total Tickets</span>
-                                            <span class="bg-icon"><i class="fa fa-ticket"></i></span>
+                                            <?php $query = $this->db->query("SELECT * FROM answers"); ?>
+                                            <span class="number counter"><?php echo $query->num_rows();?></span>
+                                            <span class="name">Answers</span>
+                                            <span class="bg-icon"><i class="fa fa-comments"></i></span>
                                         </a>
                                     </div>
 

@@ -7,11 +7,27 @@ Class ModelMyForce extends CI_Model{
     $query =$this->db->get_where('admin',$data);
     return $query;	
   }
+  public function LoadTargetsById($id){
+		$this->db->where('id_target',$id);
+    $db =$this->db->get('targets');
+    return $db;
+  }
 
+  public function updateTargetsById($where,$data,$table){
+		$this->db->where($where);
+		$this->db->update($table,$data);
+  }
+  
   public function insertEvents($events){
 		$this->db->insert('events',$events);
   }
   
+  public function loadTargets(){
+		$this->db->order_by('id_target','desc');
+		$db = $this->db->get('targets');
+		return $db;
+  }
+
   public function loadEvents(){
 		$this->db->order_by('id_event','desc');
 		$db = $this->db->get('events');
@@ -215,10 +231,14 @@ Class ModelMyForce extends CI_Model{
 
   public function LoadSalesById($id){
     $this->db->where('users.id',$id);
-    $this->db->join('regionals','regionals.id_region = users.id_region');
     $this->db->join('branches','branches.id_branch = branches.id_branch');
     $db =$this->db->get('users');
     return $db;
+  }
+
+  public function deleteSales($id){
+    $this->db->where('id', $id);
+    $this->db->delete('users');
   }
 
   public function loadRegions(){
@@ -246,6 +266,43 @@ Class ModelMyForce extends CI_Model{
     $this->db->delete('regionals');
   }
 
+  public function insertTeams($regions){
+		$this->db->insert('team_updates',$regions);
+  }
+
+  public function LoadTeamsById($id){
+    $this->db->join("branches","branches.id_branch = team_updates.id_branch");
+    $this->db->join("pipelines","pipelines.id_pipeline = team_updates.id_pipeline");
+    $this->db->join("customers","customers.id_customer = team_updates.id_customer");
+    $this->db->join("users","users.id = team_updates.id");
+		$this->db->where('team_updates.id_team_update',$id);
+    $db =$this->db->get('team_updates');
+    return $db;
+  }
+
+  public function LoadPipelinesNotById($id_pipeline){
+    $this->db->where('id_pipeline !=',$id_pipeline);
+    $db =$this->db->get('pipelines');
+    return $db;
+  }
+
+  public function loadCustomersNotById($id_customer){
+    $this->db->where('id_customer !=',$id_customer);
+    $db =$this->db->get('customers');
+    return $db;
+  }
+
+  public function loadSalesNotById($id_sales){
+    $this->db->where('id !=',$id_sales);
+    $db =$this->db->get('users');
+    return $db;
+  }
+
+  public function updateTeamsById($where,$data,$table){
+		$this->db->where($where);
+		$this->db->update($table,$data);
+  }
+  
   public function loadBranches(){
 		$this->db->order_by('id_branch','desc');
 		$db = $this->db->get('branches');
@@ -272,7 +329,71 @@ Class ModelMyForce extends CI_Model{
     $this->db->delete('branches');
   }
 
+  public function loadTeams(){
+    $this->db->join("customers","customers.id_customer = team_updates.id_customer");
+    $this->db->join("branches","branches.id_branch = team_updates.id_branch");
+    $this->db->join("users","users.id = team_updates.id");
+    $this->db->join("pipelines","pipelines.id_pipeline = team_updates.id_pipeline");
+		$this->db->order_by('team_updates.id_team_update','desc');
+		$db = $this->db->get('team_updates');
+		return $db;
+  }
 
+  public function LoadPipelines(){
+    $this->db->order_by('id_pipeline','desc');
+    $db =$this->db->get('pipelines');
+    return $db;
+  }
 
+  public function LoadCustomers(){
+    $this->db->order_by('id_customer','desc');
+    $db =$this->db->get('customers');
+    return $db;
+  }
+  
+  public function deleteTeams($id){
+    $this->db->where('id_team_update', $id);
+    $this->db->delete('team_updates');
+  }
+
+  public function loadQuestions(){
+		$this->db->order_by('id_question','desc');
+		$db = $this->db->get('questions');
+		return $db;
+  }
+
+  public function insertQuestions($events){
+		$this->db->insert('questions',$events);
+  }
+
+  public function LoadQuestionsById($id){
+		$this->db->where('id_question',$id);
+    $db =$this->db->get('questions');
+    return $db;
+  }
+
+  public function updateQuestionsById($where,$data,$table){
+		$this->db->where($where);
+		$this->db->update($table,$data);
+	}
+  
+  public function deleteQuetions($id){
+    $this->db->where('id_question', $id);
+    $this->db->delete('questions');
+  }
+
+  public function loadAnswers(){
+    $this->db->join('pipelines','answers.id_pipeline = pipelines.id_pipeline');
+    $this->db->join('users','answers.id = users.id');
+    $this->db->join('questions','answers.id_question = questions.id_question');
+		$this->db->order_by('answers.id_answer','desc');
+		$db = $this->db->get('answers');
+		return $db;
+  }
+
+  public function deleteAnswers($id){
+    $this->db->where('id_answer', $id);
+    $this->db->delete('answers');
+  }
 
 }

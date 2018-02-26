@@ -75,14 +75,14 @@
                                                 <table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
                                                     <thead>
                                                         <tr>
-                                                            <th width="1%">No</th>
-                                                            <th width="10%">Sub Product</th>
-                                                            <th width="10%">Picture</th>
+                                                            <th width="3%">No</th>
+                                                            <th width="5%">Picture</th>
+                                                            <th width="15%">Sub Product</th>
                                                             <!-- <th width="5%">Price</th> -->
-                                                            <th width="5%">Product</th>
+                                                            <th width="15%">Product</th>
                                                             <th>Description</th>
                                                             <th width="10%">PDFT</th>
-                                                            <th width="5%">Action</th>
+                                                            <th width="3%">Action</th>
                                                         </tr>
                                                     </thead>
                                                     
@@ -94,8 +94,8 @@
                                                         ?>
                                                         <tr>
                                                             <td><?php echo $no;?></td>
-                                                            <td><?php echo $result->subproduct;?></td>
                                                             <td><img src="<?php echo $result->pic;?>" width="100%"/></td>
+                                                            <td><?php echo $result->subproduct;?></td>
                                                             <!-- <td><?php echo $result->price;?></td> -->
                                                             <td><?php echo $result->product;?></td>
                                                             <td><?php echo $result->desc;?></td>

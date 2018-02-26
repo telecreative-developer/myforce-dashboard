@@ -56,6 +56,13 @@ $route['login'] = 'MyForceLogin/login';
 //Route Dashboard
 $route['dashboard']    = 'MyForce/dashboard';
 
+
+//Route Targets
+$route['targets']       = 'MyForce/targets';
+$route['edit-targets/:any']   = 'MyForce/editTargets';
+$route['updateTargets/:any'] = 'MyForce/updateTargets';
+
+
 //Route Events
 $route['events']       = 'MyForce/events';
 $route['addevents']    = 'MyForce/addevents';
@@ -87,7 +94,7 @@ $route['sales']                   = 'MyForce/sales';
 $route['pagesprofile/:any']       = 'MyForce/pagesprofile';
 $route['addsales']                = 'MyForce/addsales';
 $route['insertsales']             = 'MyForce/insertSales';
-
+$route['deleteSales/:any']        = 'MyForce/deleteSales';
 
 
 //Route Region
@@ -105,6 +112,30 @@ $route['insertbranches']      = 'MyForce/insertBranches';
 $route['editbranches/:any']   = 'MyForce/editBranches';
 $route['updatebranches/:any'] = 'MyForce/updateBranches';
 $route['deleteBranches/:any'] = 'MyForce/deleteBranches';
+
+//Route Events
+$route['teams']       = 'MyForce/teams';
+$route['addteams']      = 'MyForce/addTeams';
+$route['insertTeams']      = 'MyForce/insertTeams';
+$route['editTeams/:any']   = 'MyForce/editTeams';
+$route['updateTeams/:any'] = 'MyForce/updateTeams';
+$route['deleteTeams/:any'] = 'MyForce/deleteTeams';
+
+
+//Route Questions
+$route['questions']       = 'MyForce/questions';
+$route['addquestions']      = 'MyForce/addquestions';
+$route['insertquestions']      = 'MyForce/insertQuestions';
+$route['editquestions/:any']   = 'MyForce/editQuestions';
+$route['updatequestions/:any'] = 'MyForce/updateQuestions';
+$route['deleteQuestions/:any'] = 'MyForce/deleteQuestions';
+
+
+//Route Answers
+$route['answers']       = 'MyForce/answers';
+$route['deleteAnswers/:any'] = 'MyForce/deleteAnswers';
+
+
 
 $route['logout'] = 'MyForce/logout';
 $route['404_override'] = '';

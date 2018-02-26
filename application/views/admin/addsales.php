@@ -62,7 +62,7 @@
                                                 </div>
                                             </div>
                                             <div class="panel-body">
-                                                <form action="<?php echo base_url()?>insertsales" method="POST" class="form-horizontal" enctype="multipart/form-data">
+                                                <form class="form-horizontal">
                                                 	<div class="form-group">
                                                 		<label for="text1" class="col-sm-2 control-label">Firstname</label>
                                                 		<div class="col-sm-4">
@@ -73,13 +73,6 @@
                                                 			<input type="text" name="lastname" class="form-control" id="lastname" placeholder="Lastname">
                                                 		</div>
                                                   </div>
-
-                                                  <div class="form-group">
-                                                		<label for="text1" class="col-sm-2 control-label">Picture</label>
-                                                		<div class="col-sm-10">
-                                                      <input id="picture" type="file" class="validate" name="picture" required="ON">
-                                                    </div>
-                                                	</div>
 
                                                   <div class="form-group">
                                                 		<label for="text1" class="col-sm-2 control-label">Username</label>
@@ -100,7 +93,7 @@
                                                     </div>
                                                     <label for="text1" class="col-sm-1 control-label">Confirm Password</label>
                                                 		<div class="col-sm-5">
-                                                			<input type="password" name="cpassword" class="form-control" id="password" placeholder="Confirm Password">
+                                                			<input type="password" name="cpassword" class="form-control" id="cpassword" placeholder="Confirm Password">
                                                     </div>
                                                   </div>
 
@@ -112,8 +105,8 @@
                                                     
                                                     <label for="text1" class="col-sm-1 control-label">Gender</label>
                                                 		<div class="col-sm-5">
-                                                      <select name="gender" class="form-control">
-                                                        <option value="1">Default Select</option>
+                                                      <select name="gender" class="form-control" required="ON">
+                                                        <option value="">Default Select</option>
                                                         <option value="1">Pria</option>
                                                         <option value="0">Wanita</option>
                                                       </select>
@@ -123,8 +116,8 @@
                                                   <div class="form-group">
                                                 		<label for="text1" class="col-sm-2 control-label">Regions</label>
                                                 		<div class="col-sm-4">
-                                                      <select name="regions" class="form-control">
-                                                        <option value="1">Default Select</option>
+                                                      <select name="regions" class="form-control" required="ON">
+                                                        <option value="">Default Select</option>
                                                         <?php 
                                                           foreach($regions as $result){
                                                           ?> 
@@ -137,8 +130,8 @@
                                                     
                                                     <label for="text1" class="col-sm-1 control-label">Branches</label>
                                                 		<div class="col-sm-5">
-                                                      <select name="branches" class="form-control">
-                                                        <option value="1">Default Select</option>
+                                                      <select name="branches" class="form-control" required="ON">
+                                                        <option value="">Default Select</option>
                                                         <?php 
                                                           foreach($branches as $result){
                                                           ?> 
@@ -183,9 +176,9 @@
                                                     
                                                 	<div class="form-group">
                                                 		<div class="col-sm-offset-2 col-sm-10">
-                                                			<button type="submit" class="btn btn-primary">Submit</button>
+                                                			<input type="submit" class="btn btn-primary">
                                                 		</div>
-                                                	</div>
+                                                  </div>
                                                 </form>  
                                             </div>
                                         </div>
@@ -198,6 +191,40 @@
                     </div>  
                 </div>  
             </div>  
-
         </div>
-<?php include"style/javascriptDashboard.php";?>
+<?php include "style/javascriptDashboard.php";?>
+<script>
+
+$(function () {
+  $('form').on('submit', function (e) {
+    var password = document.getElementById("password").value;
+    var cpassword = document.getElementById("cpassword").value;
+    if(password == cpassword){
+      e.preventDefault();
+      $.ajax({
+        type: 'POST',
+        url: 'https://1afbbd3c.ngrok.io/users',
+        data: $('form').serialize(),
+        statusCode: {
+          200: function () {
+            console.log(document.getElementById("password").value);
+            console.log(document.getElementById("cpassword").value);
+          },
+          400: function () {
+            console.log(document.getElementById("password").value);
+            console.log(document.getElementById("cpassword").value);
+          },
+          502: function () {
+            
+            console.log(document.getElementById("password").value);
+            console.log(document.getElementById("cpassword").value);
+          }
+        }
+      });
+    }else{
+      alert("Password anda tidak sama");
+    }
+  });
+});
+
+</script>

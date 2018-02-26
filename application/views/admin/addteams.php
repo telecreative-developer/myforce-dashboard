@@ -23,7 +23,7 @@
                         <div class="container-fluid">
                             <div class="row page-title-div">
                                 <div class="col-md-12">
-                                    <h2 class="title">Sub Products</h2>
+                                    <h2 class="title">Teams</h2>
                                     <p class="sub-title">One stop solution for perfect admin dashboard!</p>
                                 </div>
                                 <!-- /.col-md-6 text-right -->
@@ -33,8 +33,8 @@
                                 <div class="col-md-12">
                                     <ul class="breadcrumb">
             							              <li><a href="<?php echo base_url();?>dashboard"><i class="fa fa-home"></i> Home</a></li>
-                                        <li><a href="<?php echo base_url();?>subproducts">Sub Products</li></a>
-                                        <li class="active">Add Sub Products</li>
+                                        <li><a href="<?php echo base_url();?>teams">Teams</li></a>
+                                        <li class="active">Add Teams</li>
             						            </ul>
                                 </div>
                             </div>
@@ -58,64 +58,77 @@
                                         <div class="panel">
                                             <div class="panel-heading">
                                                 <div class="panel-title">
-                                                    <h5>Input Your Event</small></h5>
+                                                    <h5>Input Your Teams</small></h5>
                                                 </div>
                                             </div>
                                             <div class="panel-body">
-
-                                                <form action="<?php echo base_url()?>insertsubproducts" method="POST" class="form-horizontal" enctype="multipart/form-data">
+                                                <form action="<?php echo base_url()?>insertTeams" method="POST" class="form-horizontal" enctype="multipart/form-data">
+        
                                                   <div class="form-group">
-                                                		<label for="text1" class="col-sm-2 control-label">Sub Product</label>
-                                                		<div class="col-sm-10">
-                                                			<input type="text" name="subproduct" class="form-control" id="title" placeholder="Input your title" required="ON">
-                                                		</div>
-                                                  </div>
-                                                  
-                                                  <div class="form-group">
-                                                		<label for="text1" class="col-sm-2 control-label">Picture</label>
-                                                		<div class="col-sm-10">
-                                                      <input id="picture" type="file" class="validate" name="picture" >
+                                                    <label for="text1" class="col-sm-2 control-label">Branch</label>
+                                                    <div class="col-sm-10">  
+                                                      <select name="id_branch" class="form-control" required="ON">
+                                                        <option value="">Default Select</option>
+                                                        <?php 
+                                                          foreach($branch as $result){
+                                                        ?>
+                                                          <option value="<?php echo $result->id_branch;?>"><?php echo $result->branch;?></option>
+                                                        <?php   
+                                                          }
+                                                        ?>
+                                                      </select>
                                                     </div>
                                                   </div>
 
                                                   <div class="form-group">
-                                                		<label for="text1" class="col-sm-2 control-label">File</label>
-                                                		<div class="col-sm-10">
-                                                      <input id="picture" type="file" class="validate" name="file">
+                                                    <label for="text1" class="col-sm-2 control-label">Pipelines</label>
+                                                    <div class="col-sm-10">  
+                                                      <select name="id_pipeline" class="form-control" required="ON">
+                                                        <option value="">Default Select</option>
+                                                        <?php 
+                                                          foreach($pipelines as $result){
+                                                        ?>
+                                                          <option value="<?php echo $result->id_pipeline;?>"><?php echo $result->pipeline;?></option>
+                                                        <?php   
+                                                          }
+                                                        ?>
+                                                      </select>
                                                     </div>
                                                   </div>
-                                                  
-                                                  <div class="form-group">
-                                                		<label for="predefined" class="col-sm-2 control-label">Product</label>
-                                                		<div class="col-sm-10">
-                                                        <select name="id_product" class="form-control" required="ON" required="ON">
-                                                          <option value="">Default Select</option>
-                                                          <?php 
-                                                            foreach($products as $result){
-                                                          ?>
-                                                              <option value="<?php echo $result->id_product;?>"><?php echo $result->product;?></option>
-                                                          <?php   
-                                                            }
-                                                          ?>
-                                                        </select>
-                                                		</div>
-                                                  </div>
-                                                  
 
-                                                  <!-- <div class="form-group">
-                                                    <label for="time" class="col-sm-2 control-label">Price</label>
-                                                    <div class="col-sm-10">
-                                                      <input type="number" name="price" class="form-control" id="time">
+                                                  <div class="form-group">
+                                                    <label for="text1" class="col-sm-2 control-label">Customer</label>
+                                                    <div class="col-sm-10">  
+                                                      <select name="id_customer" class="form-control" required="ON">
+                                                        <option value="">Default Select</option>
+                                                        <?php 
+                                                          foreach($customers as $result){
+                                                        ?>
+                                                          <option value="<?php echo $result->id_customer;?>"><?php echo $result->name;?></option>
+                                                        <?php   
+                                                          }
+                                                        ?>
+                                                      </select>
                                                     </div>
-                                                  </div> -->
-
-                                                  <div class="form-group">
-                                                      <label for="text1" class="col-sm-2 control-label">Description</label>
-                                                      <div class="col-sm-10">
-                                                          <textarea class="form-control note-codable" name="description"  placeholder="Desc.." style="height: 300px;"></textarea>
-                                                      </div>
                                                   </div>
                                                     
+                                                  <div class="form-group">
+                                                    <label for="text1" class="col-sm-2 control-label">Sales</label>
+                                                    <div class="col-sm-10">  
+                                                      <select name="id_sales" class="form-control" required="ON">
+                                                        <option value="">Default Select</option>
+                                                        <?php 
+                                                          foreach($sales as $result){
+                                                        ?>
+                                                          <option value="<?php echo $result->id;?>"><?php echo $result->username;?></option>
+                                                        <?php   
+                                                          }
+                                                        ?>
+                                                      </select>
+                                                    </div>
+                                                  </div>
+
+
                                                 	<div class="form-group">
                                                 		<div class="col-sm-offset-2 col-sm-10">
                                                 			<button type="submit" class="btn btn-primary">Submit</button>

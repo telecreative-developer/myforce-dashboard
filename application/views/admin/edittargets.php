@@ -23,7 +23,7 @@
                         <div class="container-fluid">
                             <div class="row page-title-div">
                                 <div class="col-md-12">
-                                    <h2 class="title">Products</h2>
+                                    <h2 class="title">Edit Targets</h2>
                                     <p class="sub-title">One stop solution for perfect admin dashboard!</p>
                                 </div>
                                 <!-- /.col-md-6 text-right -->
@@ -33,16 +33,16 @@
                                 <div class="col-md-12">
                                     <ul class="breadcrumb">
             							              <li><a href="<?php echo base_url();?>dashboard"><i class="fa fa-home"></i> Home</a></li>
-                                        <li><a href="<?php echo base_url();?>products">Products</li></a>
-                                        <li class="active">Add Products</li>
-            						            </ul>
+                                        <li><a href="<?php echo base_url();?>targets">Targets</li></a>
+                                        <li class="active">Edit Targets</li>
+            					            	</ul>
                                 </div>
                             </div>
                             <!-- /.row -->
                         </div>
+                        
                         <section class="section">
                             <div class="container-fluid">
-
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="alert alert-info" role="alert">
@@ -58,37 +58,51 @@
                                         <div class="panel">
                                             <div class="panel-heading">
                                                 <div class="panel-title">
-                                                    <h5>Input Your Products</small></h5>
+                                                    <h5>Edit Your Target</small></h5>
                                                 </div>
                                             </div>
                                             <div class="panel-body">
-
-                                                <form action="<?php echo base_url()?>insertProducts" method="POST" class="form-horizontal" enctype="multipart/form-data">
-                                                	<div class="form-group">
-                                                		<label for="text1" class="col-sm-2 control-label">Title</label>
-                                                		<div class="col-sm-10">
-                                                			<input type="text" name="title" class="form-control" id="title" placeholder="Input your title" required="ON">
-                                                		</div>
-                                                  </div>
-                                                  <div class="form-group">
-                                                		<label for="text1" class="col-sm-2 control-label">Picture</label>
-                                                		<div class="col-sm-10">
-                                                      <input id="picture" type="file" class="validate" name="picture" required="ON" required="ON">
-                                                    </div>
-                                                	</div>
-                                                  <div class="form-group">
-                                                      <label for="text1" class="col-sm-2 control-label">Description</label>
-                                                      <div class="col-sm-10">
-                                                        <textarea class="form-control note-codable" name="description" placeholder="Desc.." style="height: 300px;" required="ON"></textarea>
+                                            <?php foreach($targets as $result){?>
+                                                <form method="POST" action="<?php echo base_url()?>updateTargets/<?php echo $result->id_target;?>" class="form-horizontal">
+                                                    <div class="form-group">
+                                                      <label for="text1" class="col-sm-2 control-label">Target Month</label>
+                                                      <div class="col-sm-4">
+                                                        <input type="number" name="target_month" class="form-control" id="target-month" value="<?php echo $result->target_month;?>" placeholder="Target Month">
                                                       </div>
-                                                  </div>
+
+                                                      <label for="text1" class="col-sm-1 control-label">Target Year</label>
+                                                      <div class="col-sm-5">
+                                                        <input type="number" name="target_year" class="form-control" id="target-year" value="<?php echo $result->target_year;?>" placeholder="Target Year">
+                                                      </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                      <label for="text1" class="col-sm-2 control-label">Target Revenue Month</label>
+                                                      <div class="col-sm-4">
+                                                        <input type="number" name="target_revenue_month" class="form-control" id="target-revenue-month" value="<?php echo $result->target_revenue_month;?>" placeholder="Target Revenue Month">
+                                                      </div>
+
+                                                      <label for="text1" class="col-sm-1 control-label">Target Revenue Year</label>
+                                                      <div class="col-sm-5">
+                                                        <input type="number" name="target_revenue_year" class="form-control" id="target-revenue-year" value="<?php echo $result->target_revenue_year;?>" placeholder="Target Revenue Year">
+                                                      </div>
+                                                    </div>
+
+                                                     <div class="form-group">
+                                                      <label for="text1" class="col-sm-2 control-label">Year</label>
+                                                      <div class="col-sm-4">
+                                                        <input type="number" name="year" class="form-control" id="year" value="<?php echo $result->year;?>" placeholder="Year">
+                                                      </div>
+                                                    </div>
                                                     
-                                                	<div class="form-group">
-                                                		<div class="col-sm-offset-2 col-sm-10">
-                                                			<button type="submit" class="btn btn-primary">Submit</button>
-                                                		</div>
-                                                	</div>
+                                                      
+                                                    <div class="form-group">
+                                                      <div class="col-sm-offset-2 col-sm-10">
+                                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                                      </div>
+                                                    </div>
                                                 </form>  
+                                              <?php } ?>
                                             </div>
                                         </div>
                                     </div>  
@@ -98,6 +112,7 @@
                             </div>  
                         </section>  
                     </div>  
+
                 </div>  
             </div>  
 

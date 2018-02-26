@@ -23,7 +23,7 @@
                         <div class="container-fluid">
                             <div class="row page-title-div">
                                 <div class="col-md-12">
-                                    <h2 class="title">Regions</h2>
+                                    <h2 class="title">Edit Questions</h2>
                                     <p class="sub-title">One stop solution for perfect admin dashboard!</p>
                                 </div>
                                 <!-- /.col-md-6 text-right -->
@@ -33,16 +33,16 @@
                                 <div class="col-md-12">
                                     <ul class="breadcrumb">
             							              <li><a href="<?php echo base_url();?>dashboard"><i class="fa fa-home"></i> Home</a></li>
-                                        <li><a href="<?php echo base_url();?>branches">Branches</li></a>
-                                        <li class="active">Add Branches</li>
-            						            </ul>
+                                        <li><a href="<?php echo base_url();?>questions">Questions</li></a>
+                                        <li class="active">Edit Questions</li>
+            					            	</ul>
                                 </div>
                             </div>
                             <!-- /.row -->
                         </div>
+                        
                         <section class="section">
                             <div class="container-fluid">
-
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="alert alert-info" role="alert">
@@ -58,25 +58,41 @@
                                         <div class="panel">
                                             <div class="panel-heading">
                                                 <div class="panel-title">
-                                                    <h5>Input Your Branches</small></h5>
+                                                    <h5>Edit Your Questions</small></h5>
                                                 </div>
                                             </div>
                                             <div class="panel-body">
-
-                                                <form method="POST" action="<?php echo base_url()?>insertbranches" class="form-horizontal">
-                                                	<div class="form-group">
-                                                		<label for="text1" class="col-sm-2 control-label">Branches</label>
-                                                		<div class="col-sm-10">
-                                                			<input type="text" name="title" class="form-control" id="title" placeholder="Input your title" required="ON">
-                                                		</div>
-                                                	</div>
+                                            <?php foreach($questions as $result){?>
+                                                <form method="POST" action="<?php echo base_url()?>updatequestions/<?php echo $result->id_question;?>" class="form-horizontal">
+                                                    <div class="form-group">
+                                                      <label for="text1" class="col-sm-2 control-label">Questions</label>
+                                                      <div class="col-sm-10">
+                                                        <input type="text" name="questions" class="form-control" id="questions" value="<?php echo $result->question;?>" placeholder="Input type text">
+                                                      </div>
+                                                    </div>
                                                     
-                                                	<div class="form-group">
-                                                		<div class="col-sm-offset-2 col-sm-10">
-                                                			<button type="submit" class="btn btn-primary">Submit</button>
-                                                		</div>
-                                                	</div>
+                                                    <div class="form-group">
+                                                      <label for="text1" class="col-sm-2 control-label">Step</label>
+                                                      <div class="col-sm-10">  
+                                                        <select name="step" class="form-control">
+                                                          <option value="<?php echo $result->step?>">Step <?php echo $result->step;?> </option>
+                                                          <option value="1">Step 1 </option>
+                                                          <option value="2">Step 2</option>
+                                                          <option value="3">Step 3</option>
+                                                          <option value="4">Step 4</option>
+                                                          <option value="5">Step 5</option>
+                                                          <option value="6">Step 6</option>
+                                                        </select>
+                                                      </div>
+                                                    </div>
+                                                      
+                                                    <div class="form-group">
+                                                      <div class="col-sm-offset-2 col-sm-10">
+                                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                                      </div>
+                                                    </div>
                                                 </form>  
+                                              <?php } ?>
                                             </div>
                                         </div>
                                     </div>  
@@ -86,6 +102,7 @@
                             </div>  
                         </section>  
                     </div>  
+
                 </div>  
             </div>  
 

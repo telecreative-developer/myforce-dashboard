@@ -10,6 +10,12 @@
   <span class="">Main Category</span>
 </li>
 <li><a href="<?php echo base_url()?>dashboard"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+
+<li class="nav-header">
+  <span class="">Target</span>
+</li>
+<li><a href="<?php echo base_url()?>targets"><i class="fa fa-calendar-check-o"></i> <span>Target</span></a></li>
+
 <li class="nav-header">
   <span class="">Appearance</span>
 </li>
@@ -33,8 +39,20 @@
         <li><a href="<?php echo base_url();?>manager"><i class="fa fa-user-plus"></i> <span>Manager</span></a></li>
     </ul>
 </li>
-<li><a href="<?php echo base_url()?>regions"><i class="fa fa-calendar-check-o"></i> <span>Regions</span></a></li>
+<!-- <li><a href="<?php echo base_url()?>regions"><i class="fa fa-calendar-check-o"></i> <span>Regions</span></a></li> -->
 <li><a href="<?php echo base_url()?>branches"><i class="fa fa-calendar-check-o"></i> <span>Branches</span></a></li>
+
+
+<li class="nav-header">
+  <span class="">Team Updates</span>
+</li>
+<li><a href="<?php echo base_url()?>teams"><i class="fa fa-calendar-check-o"></i> <span>Team</span></a></li>
+
+<li class="nav-header">
+  <span class="">Questions & Answers</span>
+  <li><a href="<?php echo base_url()?>questions"><i class="fa fa-question"></i> <span>Questions</span></a></li>
+  <li><a href="<?php echo base_url()?>answers"><i class="fa fa-envelope"></i> <span>Answers</span></a></li>
+</li>
 
 </ul>
 </div>  

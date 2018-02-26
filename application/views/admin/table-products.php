@@ -75,11 +75,11 @@
                                                 <table id="example" class="display table table-striped table-bordered" cellspacing="0" width="100%">
                                                     <thead>
                                                         <tr>
-                                                            <th width="1%">No</th>
+                                                            <th width="3%">No</th>
+                                                            <th width="5%">Picture</th>
                                                             <th width="10%">Product</th>
-                                                            <th width="10%">Picture</th>
                                                             <th>Description</th>
-                                                            <th width="5%">Action</th>
+                                                            <th width="3%">Action</th>
                                                         </tr>
                                                     </thead>
                                                     
@@ -87,11 +87,11 @@
                                                         <?php
                                                             $no = 1; 
                                                             foreach ($products as $result) {
-                                                        ?>
+                                                        ?>  
                                                         <tr>
                                                             <td><?php echo $no;?></td>
-                                                            <td><?php echo $result->product;?></td>
                                                             <td><img src="<?php echo $result->picture;?>" width="100%"/></td>
+                                                            <td><?php echo $result->product;?></td>
                                                             <td><?php echo $result->description;?></td>
                                                             <td>
                                                                 <a href="<?php echo base_url();?>editproducts/<?php echo $result->id_product;?>"><button type="button" class="btn btn-primary btn-xs btn-labeled"><i class="fa fa-pencil"></i></button></a>

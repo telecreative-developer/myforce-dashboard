@@ -67,25 +67,25 @@
                                                 	<div class="form-group">
                                                 		<label for="text1" class="col-sm-2 control-label">Titile</label>
                                                 		<div class="col-sm-10">
-                                                			<input type="text" name="title" class="form-control" id="title" placeholder="Input type text">
+                                                			<input type="text" name="title" class="form-control" id="title" placeholder="Input type title" required="ON">
                                                 		</div>
                                                 	</div>
                                                     <div class="form-group">
                                                         <label for="text1" class="col-sm-2 control-label">Description</label>
                                                 		<div class="col-sm-10">
-                                                            <textarea class="form-control note-codable" name="description"  placeholder="Desc.." style="height: 300px;"></textarea>
+                                                            <textarea class="form-control note-codable" name="description"  placeholder="Desc.." style="height: 300px;" required="ON"></textarea>
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                 		<label for="date" class="col-sm-2 control-label">Date</label>
                                                 		<div class="col-sm-10">
-                                                			<input type="date" name="date"  class="form-control" id="date">
+                                                			<input type="date" name="date"  class="form-control" id="date" required="ON">
                                                 		</div>
                                                     </div>
                                                     <div class="form-group">
                                                 		<label for="time" class="col-sm-2 control-label">Time</label>
                                                 		<div class="col-sm-10">
-                                                			<input type="time" name="time" class="form-control" id="time">
+                                                			<input type="time" name="time" class="form-control" id="time" required="ON">
                                                 		</div>
                                                     </div>
                                                     
