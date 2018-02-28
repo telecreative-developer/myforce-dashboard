@@ -89,11 +89,19 @@ $route['editsubproducts/:any']   = 'MyForce/editSubProducts';
 $route['updateSubProducts/:any'] = 'MyForce/updateSubProducts';
 $route['deleteSubProducts/:any'] = 'MyForce/deleteSubProducts';
 
+//Route Manager
+$route['managers']                   = 'MyForce/managers';
+$route['pagesManagers/:any']         = 'MyForce/pagesManagers';
+$route['addmanagers']                = 'MyForce/addmanagers';
+$route['deleteManagers/:any']        = 'MyForce/deleteManagers';
+
 //Route Sales
 $route['sales']                   = 'MyForce/sales';
 $route['pagesprofile/:any']       = 'MyForce/pagesprofile';
 $route['addsales']                = 'MyForce/addsales';
 $route['insertsales']             = 'MyForce/insertSales';
+$route['editsales/:any']          = 'MyForce/editSales';
+$route['updateSales/:any']        = 'MyForce/updateSales';
 $route['deleteSales/:any']        = 'MyForce/deleteSales';
 
 

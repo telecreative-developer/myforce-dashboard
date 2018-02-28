@@ -38,7 +38,7 @@
                                 <div class="col-md-12">
                                     <ul class="breadcrumb">
                                       <li><a href="<?php echo base_url();?>dashboard"><i class="fa fa-home"></i> Home</a></li>
-                                      <li class="active">Branches</li>
+                                      <li class="active">Managers</li>
                                     </ul>
                                 </div>
                             </div>
@@ -55,18 +55,23 @@
                                         <div class="panel">
                                             <div class="panel-heading">
                                                 <div class="panel-title">
-                                                    <h5>Branches </h5>
-                                                    <a href="<?php echo base_url()?>addbranches"><button type="button" class="btn btn-primary btn-xs btn-labeled">Add Branch <i class="fa fa-plus"></i></button></a>
+                                                    <h5>Managers </h5>
+                                                    <a href="<?php echo base_url()?>addmanagers"><button type="button" class="btn btn-primary btn-xs btn-labeled">Add Managers <i class="fa fa-plus"></i></button></a>
                                                 </div>
                                             </div>
                                             <div class="panel-body p-20">
-
                                                 <table id="example" class="display table-responsive table-bordered" cellspacing="0" width="100%">
                                                     <thead>
                                                         <tr>
                                                             <th width="3%">No</th>
-                                                            <th>Branches</th>
-                                                            <th>Manager</th>
+                                                            <th width="5%">Picture</th>
+                                                            <th>Name</th>
+                                                            <th>Username / Email</th>
+                                                            <th>Phone</th>
+                                                            <th>Bank</th>
+                                                            <th>No Rek</th>
+                                                            <!-- <th>Address</th> -->
+                                                            <th>Points</th>
                                                             <th width="3%">Action</th>
                                                         </tr>
                                                     </thead>
@@ -74,15 +79,43 @@
                                                     <tbody>
                                                         <?php
                                                             $no = 1; 
-                                                            foreach ($branches as $result) {
+                                                            foreach ($managers as $result) {
                                                         ?>
                                                         <tr>
                                                             <td><?php echo $no;?></td>
-                                                            <td><?php echo $result->branch;?></td>
-                                                            <td><a href="<?php echo base_url()?>pagesManagers/<?php echo $result->id_manager;?>" style="color:blue;"><?php echo $result->first_name;?> <?php echo $result->last_name;?></a></td>
                                                             <td>
-                                                                <a href="<?php echo base_url();?>editbranches/<?php echo $result->id_branch;?>"><button type="button" class="btn btn-primary btn-xs btn-labeled"><i class="fa fa-pencil"></i></button></a>
-                                                                <a onclick="javascript:return confirm('Delete ?')" href="<?php echo base_url();?>deleteBranches/<?php echo $result->id_branch;?>"><button type="button" class="btn btn-danger btn-xs btn-labeled"><i class="fa fa-remove"></i></button></a>
+                                                              <?php 
+                                                                if($result->avatar == ""){
+                                                                  if($result->gender == '1'){
+                                                                  ?><img src="http://www.tlcteignmouth.co.uk/wp-content/uploads/2015/06/default-avatar_man.png" width="100%"/>
+                                                                  <?php 
+                                                                    }else{
+                                                                      ?><img src="http://usvirtualcareers.com/wp-content/uploads/2016/06/default-avatar_women.png" width="100%"/>
+                                                                  <?php  
+                                                                  }
+
+                                                                }else{
+                                                                
+                                                                ?> <img src="<?php echo $result->avatar;?>" width="100%"/>
+                                                                
+                                                              <?php
+                                                                }
+                                                              ?>
+                                                            </td>
+                                                            <td><?php echo $result->first_name;?> <?php echo $result->last_name;?></td>
+                                                            <td>
+                                                              <a href="pagesManagers/<?php echo $result->id_manager?>" span style="color:blue;"><?php echo $result->username;?></a>
+                                                              <br/>
+                                                              <?php echo $result->email;?>
+                                                            </td>
+                                                            <td><?php echo $result->phone;?></td>
+                                                            <td><?php echo $result->bank_name;?></td>
+                                                            <td><?php echo $result->no_rek;?></td>
+                                                            <!-- <td><?php echo $result->address;?></td> -->
+                                                            <td><?php echo $result->point;?> Points</td>
+                                                            <td>
+                                                                <!-- <a href="<?php echo base_url();?>editevents/<?php echo $result->id_manager;?>"><button type="button" class="btn btn-primary btn-xs btn-labeled"><i class="fa fa-pencil"></i></button></a> -->
+                                                                <a onclick="javascript:return confirm('Delete ?')" href="<?php echo base_url();?>deleteManagers/<?php echo $result->id_manager;?>"><button type="button" class="btn btn-danger btn-xs btn-labeled"><i class="fa fa-remove"></i></button></a>
                                                             </td>
                                                         </tr>
                                                         <?php 

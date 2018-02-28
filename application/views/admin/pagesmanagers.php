@@ -1,6 +1,14 @@
 <?php include "style/styleDashboard.php"; ?>
+<?php 
+    $id = $this->uri->segment(2);
+
+    $query = $this->db->query("SELECT * FROM branches WHERE id_manager = $id");
+    $row = $query->row();
+
+    $branch = $row->branch;
+?>
 <?php
-    foreach ($sales as $result) {
+    foreach ($managers as $result) {
 ?>
     <body class="top-navbar-fixed">
         <div class="main-wrapper">
@@ -84,11 +92,9 @@
                                                     }
                                                     ?>
                                                     
-                                                    <div class="text-center">
-                                                        <!-- <a href="<?php echo base_url();?>editsales/<?php echo $result->id;?>">
-                                                          <button type="button" class="btn btn-primary btn-xs btn-labeled mt-10">Edit Sales<span class="btn-label btn-label-right"><i class="fa fa-pencil"></i></span></button>
-                                                        </a> -->
-                                                    </div>
+                                                    <!-- <div class="text-center">
+                                                        <button type="button" class="btn btn btn-xs btn-labeled mt-10" style="color:#fff;background: linear-gradient(#EE8084, #DC6CBE);">Edit Manager<span class="btn-label btn-label-right"><i class="fa fa-pencil"></i></span></button>
+                                                    </div> -->
                                                 </div>
                                             </div>
                                         </div>
@@ -107,48 +113,55 @@
                                                 	<tbody>
                                                     <tr>
                                                       <th width="0%">Name <span style="float:right;"> : </span> </th>
-                                                			<td width="60%">
-                                                        <p style="word-break:break-all; margin-bottom:0px;"><?php echo $result->first_name;?> <?php echo $result->last_name;?></p>
+                                                        <td width="60%">
+                                                            <p style="word-break:break-all; margin-bottom:0px;"><?php echo $result->first_name;?> <?php echo $result->last_name;?></p>
                                                       </td>
                                                     </tr>
                                                     <tr>
-                                                			<th>Username <span style="float:right;"> : </span> </th>
-                                                			<td>
-                                                        <p style="word-break:break-all; margin-bottom:0px;"><?php echo $result->username;?></p>
-                                                      </td>
+                                                        <th>Username <span style="float:right;"> : </span> </th>
+                                                        <td>
+                                                            <p style="word-break:break-all; margin-bottom:0px;"><?php echo $result->username;?></p>
+                                                        </td>
                                                     </tr>
                                                     <tr>
-                                                			<th>Email <span style="float:right;"> : </span> </th>
-                                                			<td>
-                                                        <p style="word-break:break-all; margin-bottom:0px;"><?php echo $result->email;?></p>
-                                                      </td>
+                                                        <th>Email <span style="float:right;"> : </span> </th>
+                                                        <td>
+                                                            <p style="word-break:break-all; margin-bottom:0px;"><?php echo $result->email;?></p>
+                                                        </td>
                                                     </tr>
                                                     <tr>
-                                                			<th>Gender <span style="float:right;"> : </span> </th>
-                                                			<td>
-                                                        <?php 
-                                                          if($result->gender == '1'){
-                                                            echo "<p style='height:0px;'>Pria</p>";
-                                                            
-                                                          }else{
-                                                            echo "<p style='height:0px;'>Wanita</p>";
-                                                          }
-                                                        ?>
-                                                      </td>
+                                                        <th>Gender <span style="float:right;"> : </span> </th>
+                                                        <td>
+                                                            <?php 
+                                                            if($result->gender == '1'){
+                                                                echo "<p style='height:0px;'>Pria</p>";
+                                                                
+                                                            }else{
+                                                                echo "<p style='height:0px;'>Wanita</p>";
+                                                            }
+                                                            ?>
+                                                        </td>
                                                     </tr>
                                                     <tr>
-                                                			<th>Phone Number <span style="float:right;"> : </span> </th>
-                                                			<td>
+                                                        <th>Phone Number <span style="float:right;"> : </span> </th>
+                                                        <td>
                                                         <p style="word-break:break-all; margin-bottom:0px;"><?php echo $result->phone;?></p>
                                                       </td>
                                                     </tr>
                                                     <tr>
                                                         <th>Level <span style="float:right;"> : </span> </th>
                                                         <td>
-                                                        <button type="button" class="btn btn-default btn-sm" style="color:#fff;background: linear-gradient(#2D38F9, #20E6CD);">Sales</button>
+                                                        <button type="button" class="btn btn-default btn-sm" style="color:#fff;background: linear-gradient(#EE8084, #DC6CBE);">Manager</button>
                                                       </td>
                                                     </tr>
 
+                                                    <tr>
+                                                        <th>Branch <span style="float:right;"> : </span> </th>
+                                                        <td>
+                                                        <p style="word-break:break-all; margin-bottom:0px;"><?php echo $branch;?></p>
+                                                      </td>
+                                                    </tr>
+                                                    
                                                     <!-- <tr>
                                                 			<th>BOD <span style="float:right;"> : </span></th>
                                                 			<td>
@@ -168,7 +181,7 @@
 
                                     <div class="row mb-30">
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                            <a class="dashboard-stat-2 bg-primary" href="#">
+                                            <a class="dashboard-stat-2 bg-pinkpoints" href="#">
                                                 <div class="stat-content">
                                                     <span class="number counter"><?php echo $result->point;?></span>
                                                     <span class="name">Points</span>
@@ -188,7 +201,6 @@
                                       <hr/>
                                       <b>Address</b> <br/><?php echo $result->address;?>
                                       <br/>
-                                      
                                     </div>
                                   </div>
 
@@ -202,21 +214,57 @@
                                     </div>
                                   </div>
                                 <!-- /.col-md-9 -->
-                                <div class="row">
-                                  
-                                  <div class="col-lg-6">
-                                    <div class="bg-white p-15" style="margin-top:10px; margin-bottom:30px;">
-                                      <div role="tabpanel" id="home2">
-                                        Branches
-                                        <hr/>
-                                        <b>Branch :</b> <?php echo $result->branch;?>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
+                                
                             </div>
                             <!-- /.row -->
-                            
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="tab-box" style="padding-left:15px; padding-right:15px; margin-bottom:20px;">
+                                        <div class="tab-content bg-white p-15">
+                                            <div role="tabpanel" class="tab-pane active" id="home2">
+                                                List Sales (<?php echo $branch;?>)
+                                                <hr/>
+                                                <div class="row">
+                                                    
+                                                    <?php 
+                                                        foreach($sales as $fetch_sales){                                        
+                                                    ?>    
+                                                    <div class="col-lg-1">
+                                                        <?php 
+                                                        if($fetch_sales->avatar == ""){
+                                                            if($fetch_sales->gender == '1'){
+                                                            ?>    
+                                                            <img src="http://www.tlcteignmouth.co.uk/wp-content/uploads/2015/06/default-avatar_man.png" class="border-radius-50" style="width:100%;">
+                                                            <?php 
+                                                            }else{
+                                                                ?>
+                                                                <img src="http://usvirtualcareers.com/wp-content/uploads/2016/06/default-avatar_women.png" class="border-radius-50" style="width:100%;">
+                                                            <?php  
+                                                            }
+
+                                                        }else{  
+                                                        ?> 
+                                                        <img src="<?php echo $fetch_sales->avatar;?>" class="border-radius-50" style="width:100%;">
+                                                        <?php
+                                                        }
+                                                        ?>         
+                                                    </div>
+                                                        <div class="col-lg-3">
+                                                            <div class="box-sales" style="margin-top:25px;">
+                                                                <p style="margin-bottom:0px;"> <a href="<?php echo base_url();?>pagesprofile/<?php echo $fetch_sales->id;?>"><?php echo $fetch_sales->first_name;?> <?php echo $fetch_sales->last_name;?></a></p>
+                                                                <p> <?php echo $fetch_sales->email;?></p>
+                                                            </div>
+                                                        </div>
+                                                    <?php 
+                                                        }
+                                                    ?>
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <!-- /.container-fluid -->
                     </div>

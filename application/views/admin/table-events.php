@@ -51,17 +51,6 @@
 
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <div class="alert alert-info" role="alert">
-                                            <strong>Datatables!</strong> This is a plug-in for the jQuery Javascript library. It is a highly flexible tool, based upon the foundations of progressive enhancement, and will add advanced interaction controls to any HTML table. For official documentation, <a href="<?php echo base_url();?>assets/https://datatables.net/" target="_blank" class=" ml-5"><i class="fa fa-hand-o-right"></i> click here <i class="fa fa-hand-o-left"></i></a>.
-                                        </div>
-                                        <!-- /.alert alert-info -->
-                                    </div>
-                                    <!-- /.col-md-12 -->
-                                </div>
-                                <!-- /.row -->
-
-                                <div class="row">
-                                    <div class="col-md-12">
 
                                         <div class="panel">
                                             <div class="panel-heading">

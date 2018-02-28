@@ -1,12 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
+error_reporting(0);
 class MyForce extends CI_Controller {
-
   public function __construct()
 	{
     parent::__construct();
     $this->load->helper('date');
+    $this->load->library('pagination');
+
 		if($this->session->userdata('username') == ""){
 			redirect('../');	
 		}
@@ -14,7 +15,52 @@ class MyForce extends CI_Controller {
 
 	public function dashboard()
 	{
-		$this->load->view('admin/dashboard');
+    $data['managers'] = $this->ModelMyForce->loadDashboardManagers()->result();
+
+    $config = array();
+    $config["base_url"] = base_url() . "MyForce/dashboard";
+    $query = $this->db->query("SELECT * FROM managers, branches WHERE managers.id_manager = branches.id_manager");
+    $x = $query->num_rows($query);
+
+    $config["total_rows"] 	= $x;
+    $config["per_page"] 	= 5;
+    $config["uri_segment"] 	= 3;
+    $config['num_links'] 	= 5;
+
+    $config['full_tag_open'] 	= '<div class="pagination"><ul>';
+    $config['full_tag_close'] 	= '</ul></div><!--pagination-->';
+
+    $config['first_link'] 		= '&laquo; First';
+    $config['first_tag_open'] 	= '<li class="prev page">';
+    $config['first_tag_close'] 	= '</li>';
+
+    $config['last_link'] 		= 'Last &raquo;';
+    $config['last_tag_open'] 	= '<li class="next page">';
+    $config['last_tag_close'] 	= '</li>';
+
+    $config['next_link'] 		= 'Next &rarr;';
+    $config['next_tag_open'] 	= '<li class="next page">';
+    $config['next_tag_close'] 	= '</li>';
+
+    $config['prev_link'] 		= '&larr; Previous';
+    $config['prev_tag_open'] 	= '<li class="prev page">';
+    $config['prev_tag_close'] 	= '</li>';
+
+    $config['cur_tag_open'] 	= '<li class="active"><a href="">';
+    $config['cur_tag_close'] 	= '</a></li>';
+
+    $config['num_tag_open'] 	= '<li class="page">';
+    $config['num_tag_close'] 	= '</li>';
+
+    $this->pagination->initialize($config);
+
+    $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+      
+    $data["results"] = $this->ModelMyForce->count_managers($config["per_page"], $page);
+    $data["links"]   = $this->pagination->create_links();
+
+
+		$this->load->view('admin/dashboard',$data);
   }
   
   public function targets()
@@ -432,6 +478,42 @@ class MyForce extends CI_Controller {
     </script>");
   }
 
+  public function managers()
+	{
+    $data['managers']  = $this->ModelMyForce->LoadManagers()->result();
+		$this->load->view('admin/table-managers',$data);
+  }
+
+  public function addmanagers()
+	{
+		$this->load->view('admin/addmanagers');
+  }
+
+
+  public function pagesManagers()
+	{
+    $id = $this->uri->segment(2);
+
+    $query = $this->db->query("SELECT * FROM branches WHERE id_manager = $id");
+    $row = $query->row();
+
+    $id_branch = $row->id_branch;
+
+    $data['managers']  = $this->ModelMyForce->LoadManagersById($id)->result();
+    $data['sales']     = $this->ModelMyForce->LoadSalesDashboardById($id_branch)->result();
+		$this->load->view('admin/pagesmanagers',$data);
+  }
+
+  public function deleteManagers() {
+    $id = $this->uri->segment(2);
+    $this->ModelMyForce->deleteManagers($id);
+    echo ("<script LANGUAGE='JavaScript'>
+    window.alert('Delete Data');
+    window.location.href='../managers';
+    </script>");
+  }
+
+
   public function sales()
 	{
     $data['sales']  = $this->ModelMyForce->LoadSales()->result();
@@ -448,7 +530,7 @@ class MyForce extends CI_Controller {
   public function addsales()
 	{
     $data['branches'] = $this->ModelMyForce->loadBranches()->result();
-    $data['regions']  = $this->ModelMyForce->LoadRegions()->result();
+    // $data['regions']  = $this->ModelMyForce->LoadRegions()->result();
 		$this->load->view('admin/addsales',$data);
   }
 
@@ -499,6 +581,57 @@ class MyForce extends CI_Controller {
     //  window.alert('Success Data');
     //  window.location.href='regions';
     //  </script>");
+  }
+
+  public function editSales()
+	{
+    $id = $this->uri->segment(2);
+
+    $query = $this->db->query("SELECT * FROM users WHERE id = $id");
+    $row = $query->row();
+
+    $id_branch = $row->id_branch;
+
+    $data['branch']  = $this->ModelMyForce->LoadBranchNotById($id_branch)->result();
+    $data['sales'] = $this->ModelMyForce->LoadSalesById($id)->result();
+		$this->load->view('admin/editsales',$data);
+  }
+
+  public function updateSales() {
+    $datenow = date("Y-m-d");
+    $timenow = date("H:i:s");
+  
+    $id = $this->uri->segment(2);
+    // $firstname            = $this->input->post('firstname');
+    // $lastname             = $this->input->post('lastname');
+    // $phone                = $this->input->post('phone');
+    // $gender               = $this->input->post('gender');
+    $branch               = $this->input->post('branch');
+    // $bank                 = $this->input->post('bank');
+    // $norek                = $this->input->post('norek');
+    // $address              = $this->input->post('address');
+    
+		$data = array(
+      // 'first_name'        => $firstname,
+      // 'last_name'         => $lastname,
+      // 'phone'             => $phone,
+      // 'gender'            => $gender,
+      'id_branch'         => $branch,
+      // 'bank_name'         => $bank,
+      // 'no_rek'            => $norek,
+      // 'address'           => $address,
+      'updatedAt'		      => $datenow." ".$timenow
+		);
+		
+		$where = array(
+			'id' => $id
+    );
+    
+    $this->ModelMyForce->updateTeamsById($where,$data,'users');
+		echo ("<script LANGUAGE='JavaScript'>
+     window.alert('Update Data');
+     window.location.href='../sales';
+     </script>");
   }
 
   public function deleteSales() {
@@ -589,17 +722,20 @@ class MyForce extends CI_Controller {
 
   public function addBranches()
 	{
-		$this->load->view('admin/addbranches');
+    $data['managers']  = $this->ModelMyForce->LoadManagers()->result();
+		$this->load->view('admin/addbranches',$data);
   }
 
   public function insertBranches(){
     $branches         = $this->input->post('title');
+    $id_manager       = $this->input->post('id_manager');
 
     $datenow = date("Y-m-d");
     $timenow = date("h:i:s");
 
     $regions = array(
       'branch' 			    => $branches,
+      'id_manager' 			=> $id_manager,
       'createdAt'		    => $datenow." ".$timenow,
       'updatedAt'		    => $datenow." ".$timenow
     );
@@ -614,7 +750,14 @@ class MyForce extends CI_Controller {
   public function editBranches()
 	{
     $id = $this->uri->segment(2);
+    
+    $query = $this->db->query("SELECT * FROM branches WHERE id_branch = $id");
+    $row = $query->row();
+
+    $id_manager = $row->id_manager;
+
     $data['branches'] = $this->ModelMyForce->LoadBranchesById($id)->result();
+    $data['managers']  = $this->ModelMyForce->LoadManagerNotById($id_manager)->result();
 		$this->load->view('admin/editbranches',$data);
   }
 
@@ -624,9 +767,11 @@ class MyForce extends CI_Controller {
   
     $id = $this->uri->segment(2);
     $branch         = $this->input->post('title');
+    $id_manager         = $this->input->post('id_manager');
     
 		$data = array(
       'branch'         => $branch,
+      'id_manager'     => $id_manager,
       'updatedAt'		   => $datenow." ".$timenow
 		);
 		
@@ -838,6 +983,6 @@ class MyForce extends CI_Controller {
 
   public Function logout(){
 		$this->session->sess_destroy();
-		//redirect('');
+		redirect('../');
   }
 }

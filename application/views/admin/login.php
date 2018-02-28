@@ -13,9 +13,6 @@
                                 </div>
                             </div>
                             <div class="panel-body p-20">
-                                <div class="section-title">
-                                    <p class="sub-title text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                </div>
                                 <form method="POST" action="<?php echo base_url()?>login">
                                 	<div class="form-group">
                                 		<label for="exampleInputEmail1">Username</label>

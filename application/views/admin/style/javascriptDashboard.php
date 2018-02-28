@@ -44,8 +44,12 @@ toastr.options = {
 }
 });
 
+$(".user-menu").click(function() {
+  $(this).toggleClass("show");
+});
 
-console.log("CREATED BY : TELECREATIVE");
+
+console.log("CREATED BY : TELECREATIVE")
 </script>
 </body>
 </html>

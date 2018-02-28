@@ -51,17 +51,6 @@
 
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <div class="alert alert-info" role="alert">
-                                            <strong>Datatables!</strong> This is a plug-in for the jQuery Javascript library. It is a highly flexible tool, based upon the foundations of progressive enhancement, and will add advanced interaction controls to any HTML table. For official documentation, <a href="<?php echo base_url();?>assets/https://datatables.net/" target="_blank" class=" ml-5"><i class="fa fa-hand-o-right"></i> click here <i class="fa fa-hand-o-left"></i></a>.
-                                        </div>
-                                        <!-- /.alert alert-info -->
-                                    </div>
-                                    <!-- /.col-md-12 -->
-                                </div>
-                                <!-- /.row -->
-
-                                <div class="row">
-                                    <div class="col-md-12">
 
                                         <div class="panel">
                                             <div class="panel-heading">
@@ -93,7 +82,7 @@
                                                             <td><?php echo $result->step;?></td>
                                                             <td>
                                                                 <a href="<?php echo base_url();?>editquestions/<?php echo $result->id_question;?>"><button type="button" class="btn btn-primary btn-xs btn-labeled"><i class="fa fa-pencil"></i></button></a>
-                                                                <a onclick="javascript:return confirm('Delete ?')" href="<?php echo base_url();?>deleteQuestions/<?php echo $result->id_question;?>"><button type="button" class="btn btn-danger btn-xs btn-labeled"><i class="fa fa-remove"></i></button></a>
+                                                                <!-- <a onclick="javascript:return confirm('Delete ?')" href="<?php echo base_url();?>deleteQuestions/<?php echo $result->id_question;?>"><button type="button" class="btn btn-danger btn-xs btn-labeled"><i class="fa fa-remove"></i></button></a> -->
                                                             </td>
                                                         </tr>
                                                         <?php 

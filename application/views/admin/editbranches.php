@@ -43,15 +43,6 @@
                         
                         <section class="section">
                             <div class="container-fluid">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="alert alert-info" role="alert">
-                                            <strong>Datatables!</strong> This is a plug-in for the jQuery Javascript library. It is a highly flexible tool, based upon the foundations of progressive enhancement, and will add advanced interaction controls to any HTML table. For official documentation, <a href="<?php echo base_url();?>assets/https://datatables.net/" target="_blank" class=" ml-5"><i class="fa fa-hand-o-right"></i> click here <i class="fa fa-hand-o-left"></i></a>.
-                                        </div>
-                                        <!-- /.alert alert-info -->
-                                    </div>
-                                    <!-- /.col-md-12 -->
-                                </div>
 
                                 <div class="row">
                                     <div class="col-md-12">
@@ -70,6 +61,22 @@
                                                         <input type="text" name="title" class="form-control" id="title" value="<?php echo $result->branch;?>" placeholder="Input type text">
                                                       </div>
                                                     </div>
+                                                    <div class="form-group">
+                                                		<label for="predefined" class="col-sm-2 control-label">Managers</label>
+                                                		<div class="col-sm-10">
+                                                        <select name="id_manager" class="form-control" required="ON" required="ON">
+                                                          <option value="<?php echo $result->id_manager?>"><?php echo $result->first_name?> <?php echo $result->last_name;?></option>
+                                                          <?php 
+                                                            foreach($managers as $selectfor){
+                                                          ?>
+                                                            <option value="<?php echo $selectfor->id_manager;?>"><?php echo $selectfor->first_name;?> <?php echo $selectfor->last_name;?></option>
+                                                          <?php   
+                                                            }
+                                                          ?>
+                                                        </select>
+                                                		</div>
+                                                  </div>
+
                                                     <div class="form-group">
                                                       <div class="col-sm-offset-2 col-sm-10">
                                                         <button type="submit" class="btn btn-primary">Submit</button>

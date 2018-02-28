@@ -24,7 +24,7 @@
                         <div class="container-fluid">
                             <div class="row page-title-div">
                                 <div class="col-md-12">
-                                    <h2 class="title">Sales</h2>
+                                    <h2 class="title">Managers</h2>
                                     <p class="sub-title">One stop solution for perfect admin dashboard!</p>
                                 </div>
                                 <!-- /.col-md-6 text-right -->
@@ -34,8 +34,8 @@
                                 <div class="col-md-12">
                                     <ul class="breadcrumb">
             							              <li><a href="<?php echo base_url();?>dashboard"><i class="fa fa-home"></i> Home</a></li>
-                                        <li><a href="<?php echo base_url();?>sales">Sales</li></a>
-                                        <li class="active">Add Sales</li>
+                                        <li><a href="<?php echo base_url();?>managers">Managers</li></a>
+                                        <li class="active">Add Managers</li>
             						            </ul>
                                 </div>
                             </div>
@@ -48,11 +48,11 @@
                                         <div class="panel">
                                             <div class="panel-heading">
                                                 <div class="panel-title">
-                                                    <h5>Input Your Sales</small></h5>
+                                                    <h5>Input Your Managers</small></h5>
                                                 </div>
                                             </div>
                                             <div class="panel-body">
-                                                <form class="form-horizontal" id="postSales">
+                                                <form class="form-horizontal" id="postManagers">
                                                 	<div class="form-group">
                                                 		<label for="text1" class="col-sm-2 control-label">Firstname</label>
                                                 		<div class="col-sm-4">
@@ -102,24 +102,10 @@
                                                       </select>
                                                     </div>
                                                   </div>
-                                                  
-                                                  <div class="form-group">
-                                                    <label for="text1" class="col-sm-2 control-label">Branches</label>
-                                                		<div class="col-sm-4">
-                                                      <select name="id_branch" class="form-control" required="ON">
-                                                        <option value="">Default Select</option>
-                                                        <?php 
-                                                          foreach($branches as $result){
-                                                          ?> 
-                                                            <option value="<?php echo $result->id_branch?>"><?php echo $result->branch;?></option> 
-                                                          <?php
-                                                          }
-                                                        ?>
-                                                      </select>
-                                                    </div>
                                                     
-                                                    <label for="text1" class="col-sm-1 control-label">Bank</label>
-                                                      <div class="col-sm-5">
+                                                  <div class="form-group">
+                                                    <label for="text1" class="col-sm-2 control-label">Bank</label>
+                                                      <div class="col-sm-4">
                                                         <select name="bank_name" class="form-control" required="ON">
                                                           <option value="">Default Select</option>
                                                           <option value="Bank Central Asia">Bank Central Asia</option>
@@ -128,15 +114,11 @@
                                                           <option value="Bank Mandiri">Bank Mandiri</option>
                                                         </select>
                                                       </div>
+                                                      <label for="text1" class="col-sm-1 control-label">No Rek</label>
+                                                      <div class="col-sm-5">
+                                                        <input type="number" name="no_rek" class="form-control" id="norek" placeholder="No Rekening" required="ON">
+                                                      </div>
                                                   </div>
-
-                                                  <div class="form-group">
-                                                    <label for="text1" class="col-sm-2 control-label">No Rek</label>
-                                                		<div class="col-sm-4">
-                                                      <input type="number" name="no_rek" class="form-control" id="norek" placeholder="No Rekening" required="ON">
-                                                    </div>
-                                                  </div>
-
                                                   <!-- <div class="form-group">
                                                       <label for="text1" class="col-sm-2 control-label">Bio</label>
                                                       <div class="col-sm-10">
@@ -183,12 +165,12 @@ $(function () {
       e.preventDefault();
       $.ajax({
         type: 'POST',
-        url: 'https://c4dd4986.ngrok.io/users',
+        url: 'https://bd911e75.ngrok.io/managers',
         data: $('form').serialize(),
         statusCode: {
           201: function () {
-            alert("Success add sales");
-            document.getElementById("postSales").reset();
+            alert("Success add managers");
+            document.getElementById("postManagers").reset();
           },
           400: function () {
            alert("username or password already in use");
@@ -199,7 +181,7 @@ $(function () {
 
     }else{
       e.preventDefault();
-      document.getElementById("demo").innerHTML = "Password anda tidak sama";
+      document.getElementById("demo").innerHTML = "password is not the same ";
     }
   });
 });

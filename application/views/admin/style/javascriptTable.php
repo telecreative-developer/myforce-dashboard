@@ -26,6 +26,11 @@
 
     });
 
+
+    $(".user-menu").click(function() {
+      $(this).toggleClass("show");
+    });
+
     console.log("CREATED BY : TELECREATIVE");
 </script>
 </body>

@@ -7,6 +7,35 @@ Class ModelMyForce extends CI_Model{
     $query =$this->db->get_where('admin',$data);
     return $query;	
   }
+
+  public function loadDashboardManagers(){
+    $this->db->join('branches', 'branches.id_manager = managers.id_manager');
+		$this->db->order_by('managers.id_manager');
+		$db = $this->db->get('managers');
+		return $db;
+  }
+
+  public function LoadSalesDashboardById($id){
+		$this->db->where('id_branch',$id);
+    $db =$this->db->get('users');
+    return $db;
+  }
+
+  public function count_managers($limit, $start) {
+    $this->db->join('branches', 'branches.id_manager = managers.id_manager');
+		$this->db->order_by('branches.branch','asc');
+		$this->db->limit($limit, $start);
+    $query = $this->db->get("managers");
+    
+      if ($query->num_rows() > 0) {
+        foreach ($query->result() as $row) {
+          $data[] = $row;
+        }
+        return $data;
+      }
+      return false;
+    }
+     
   public function LoadTargetsById($id){
 		$this->db->where('id_target',$id);
     $db =$this->db->get('targets');
@@ -223,6 +252,23 @@ Class ModelMyForce extends CI_Model{
     }
   }
 
+  public function loadManagers(){
+		$this->db->order_by('id_manager','desc');
+    $db = $this->db->get('managers');
+		return $db;
+  }
+
+  public function LoadManagersById($id){
+		$this->db->where('managers.id_manager',$id);
+    $db = $this->db->get('managers');
+    return $db;
+  }
+
+  public function deleteManagers($id){
+    $this->db->where('id_manager', $id);
+    $this->db->delete('managers');
+  }
+
   public function loadSales(){
 		$this->db->order_by('id','desc');
 		$db = $this->db->get('users');
@@ -231,8 +277,20 @@ Class ModelMyForce extends CI_Model{
 
   public function LoadSalesById($id){
     $this->db->where('users.id',$id);
-    $this->db->join('branches','branches.id_branch = branches.id_branch');
+    $this->db->join('branches','branches.id_branch = users.id_branch');
     $db =$this->db->get('users');
+    return $db;
+  }
+
+  public function LoadBranchNotById($id_branch){
+    $this->db->where('id_branch !=',$id_branch);
+    $db =$this->db->get('branches');
+    return $db;
+  }
+
+  public function LoadManagerNotById($id_manager){
+    $this->db->where('id_manager !=',$id_manager);
+    $db =$this->db->get('managers');
     return $db;
   }
 
@@ -304,7 +362,8 @@ Class ModelMyForce extends CI_Model{
   }
   
   public function loadBranches(){
-		$this->db->order_by('id_branch','desc');
+    $this->db->join('managers','managers.id_manager = branches.id_manager');
+		$this->db->order_by('branches.branch','asc');
 		$db = $this->db->get('branches');
 		return $db;
   }
@@ -314,6 +373,7 @@ Class ModelMyForce extends CI_Model{
   }
 
   public function LoadBranchesById($id){
+    $this->db->join('managers','managers.id_manager = branches.id_manager');
 		$this->db->where('branches.id_branch',$id);
     $db =$this->db->get('branches');
     return $db;
