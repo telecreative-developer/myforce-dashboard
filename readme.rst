@@ -1,7 +1,7 @@
 ###################
 Dashboard Myforce
 ###################
-Instalasi
+Instalasi (LEMP) - Linux - Nginx - Mysql - Php
 **************************
 Step 1: Install the Nginx Web Server
 **************************
