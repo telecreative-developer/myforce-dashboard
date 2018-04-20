@@ -127,3 +127,116 @@ The config settings are stored in a multi-dimensional array with this prototype:
 
 		'failover' => array()
 	);
+
+*******
+Configuration Path folder upload image
+*******
+
+buka file controller MyForce.php yang berada di application/controller/MyForce.php
+lalu ubah codingan 
+
+	$targetPath		 = '/opt/lampp/htdocs/myforce/assets/images/';
+Menjadi
+	$targetPath		 = 'folder server anda/myforce/assets/images/';
+	
+Lalukan hal yang sama pada ModelMyForce.php yang berada di application/model/ModelMyForce.php
+
+	$targetPath		 = '/opt/lampp/htdocs/myforce/assets/images/';
+Menjadi
+	$targetPath		 = 'folder server anda/myforce/assets/images/';
+
+
+*******
+Configuration Add Sales and Managers
+*******
+
+Buka file addsales & addmanagers yang berada di folder 
+	application/views/admin/addsales.php
+	application/views/admin/addmanagers.php
+
+*******
+Sales :
+*******
+
+lalu cari codingan yang seperti ini : 
+
+	$(function () {
+	  $('form').on('submit', function (e) {
+	    var password = document.getElementById("password").value;
+	    var cpassword = document.getElementById("cpassword").value;
+	    if(password == cpassword){
+	      e.preventDefault();
+	      $.ajax({
+		type: 'POST',
+		url: 'https://c4dd4986.ngrok.io/users',
+		data: $('form').serialize(),
+		statusCode: {
+		  201: function () {
+		    alert("Success add sales");
+		    document.getElementById("postSales").reset();
+		  },
+		  400: function () {
+		   alert("username or password already in use");
+		  }
+		}
+	      }
+	      );
+
+	    }else{
+	      e.preventDefault();
+	      document.getElementById("demo").innerHTML = "Password anda tidak sama";
+	    }
+	  });
+	});
+
+ubah pada bagian url : 
+
+	url: 'https://c4dd4986.ngrok.io/users',
+	
+menjadi url dari service myforce : 
+
+	url: 'ipaddress/users',
+	
+*******
+Managers :
+*******
+
+lalu cari codingan yang seperti ini : 
+
+	$(function () {
+	  $('form').on('submit', function (e) {
+	    var password = document.getElementById("password").value;
+	    var cpassword = document.getElementById("cpassword").value;
+	    if(password == cpassword){
+	      e.preventDefault();
+	      $.ajax({
+		type: 'POST',
+		url: 'https://bd911e75.ngrok.io/managers',
+		data: $('form').serialize(),
+		statusCode: {
+		  201: function () {
+		    alert("Success add managers");
+		    document.getElementById("postManagers").reset();
+		  },
+		  400: function () {
+		   alert("username or password already in use");
+		  }
+		}
+	      }
+	      );
+
+	    }else{
+	      e.preventDefault();
+	      document.getElementById("demo").innerHTML = "password is not the same ";
+	    }
+	  });
+	});
+
+ubah pada bagian url : 
+
+	url: 'https://c4dd4986.ngrok.io/managers',
+	
+menjadi url dari service myforce : 
+
+	url: 'ipaddress/managers',
+	
