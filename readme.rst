@@ -11,6 +11,7 @@ Step 1: Install the Nginx Web Server
 **************************
 
 sudo apt-get update
+
 sudo apt-get install nginx
 
 *******************
@@ -104,21 +105,38 @@ The config settings are stored in a multi-dimensional array with this prototype:
 
 $db['default'] = array(
         'dsn'   => '',
+		
         'hostname' => 'ip database',
-        'username' => 'username database',
-        'password' => 'password database',
-        'database' => 'database_name',
-        'dbdriver' => 'mysqli',
-        'dbprefix' => '',
-        'pconnect' => TRUE,
-        'db_debug' => TRUE,
-        'cache_on' => FALSE,
-        'cachedir' => '',
-        'char_set' => 'utf8',
-        'dbcollat' => 'utf8_general_ci',
-        'swap_pre' => '',
-        'encrypt' => FALSE,
-        'compress' => FALSE,
-        'stricton' => FALSE,
-        'failover' => array()
+       
+		'username' => 'username database',
+        
+		'password' => 'password database',
+        
+		'database' => 'database_name',
+        
+		'dbdriver' => 'mysqli',
+        
+		'dbprefix' => '',
+        
+		'pconnect' => TRUE,
+        
+		'db_debug' => TRUE,
+        
+		'cache_on' => FALSE,
+        
+		'cachedir' => '',
+        
+		'char_set' => 'utf8',
+        
+		'dbcollat' => 'utf8_general_ci',
+        
+		'swap_pre' => '',
+        
+		'encrypt' => FALSE,
+        
+		'compress' => FALSE,
+        
+		'stricton' => FALSE,
+        
+		'failover' => array()
 );
