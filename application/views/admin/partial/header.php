@@ -1,15 +1,7 @@
 <div class="navbar-header no-padding">
-  <a class="navbar-brand" href="index.html">
-      <img src="images/logo-dark.svg" alt="Logo" class="logo">
-  </a>
-  <span class="small-nav-handle hidden-sm hidden-xs"><i class="fa fa-outdent"></i></span>
-  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">
-    <span class="sr-only">Toggle navigation</span>
-    <i class="fa fa-ellipsis-v"></i>
-  </button>
-        <button type="button" class="navbar-toggle mobile-nav-toggle" >
-    <i class="fa fa-bars"></i>
-  </button>
+  <div style="margin-top:10px;">
+    <span style="font-size:18px; margin-top:10px;"> MyForce </span>
+  </div>
 </div>
 
 <div class="collapse navbar-collapse" id="navbar-collapse-1">
