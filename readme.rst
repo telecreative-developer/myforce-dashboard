@@ -1,70 +1,242 @@
 ###################
-What is CodeIgniter
+Dashboard Myforce
 ###################
-
-CodeIgniter is an Application Development Framework - a toolkit - for people
-who build web sites using PHP. Its goal is to enable you to develop projects
-much faster than you could if you were writing code from scratch, by providing
-a rich set of libraries for commonly needed tasks, as well as a simple
-interface and logical structure to access these libraries. CodeIgniter lets
-you creatively focus on your project by minimizing the amount of code needed
-for a given task.
-
-*******************
-Release Information
-*******************
-
-This repo contains in-development code for future releases. To download the
-latest stable release please visit the `CodeIgniter Downloads
-<https://codeigniter.com/download>`_ page.
-
+Instalasi (LEMP) - Linux - Nginx - Mysql - Php
 **************************
-Changelog and New Features
+Step 1: Install the Nginx Web Server
 **************************
 
-You can find a list of all changes for each release in the `user
-guide change log <https://github.com/bcit-ci/CodeIgniter/blob/develop/user_guide_src/source/changelog.rst>`_.
+	sudo apt-get update
+
+	sudo apt-get install nginx
 
 *******************
-Server Requirements
+Step 2: Install PHP for Processing
 *******************
 
-PHP version 5.6 or newer is recommended.
+	sudo apt-get install php-fpm php-mysql
 
-It should work on 5.3.7 as well, but we strongly advise you NOT to run
-such old versions of PHP, because of potential security and performance
-issues, as well as missing features.
+Configure the PHP Processor
+We now have our PHP components installed, but we need to make a slight configuration change to make our setup more secure.
+
+Open the main php-fpm configuration file with root privileges:
+
+	sudo nano /etc/php/7.0/fpm/php.ini
+
+What we are looking for in this file is the parameter that sets cgi.fix_pathinfo. This will be commented out with a semi-colon (;) and set to "1" by default.
+
+This is an extremely insecure setting because it tells PHP to attempt to execute the closest file it can find if the requested PHP file cannot be found. This basically would allow users to craft PHP requests in a way that would allow them to execute scripts that they shouldn't be allowed to execute.
+
+We will change both of these conditions by uncommenting the line and setting it to "0" like this:
+
+
+	/etc/php/7.0/fpm/php.ini
+
+	cgi.fix_pathinfo=0
+
+
+Save and close the file when you are finished.
+
+	sudo systemctl restart php7.0-fpm
+
 
 ************
-Installation
+Configure Nginx to Use the PHP Processor
 ************
 
-Please see the `installation section <https://codeigniter.com/user_guide/installation/index.html>`_
-of the CodeIgniter User Guide.
+	sudo nano /etc/nginx/sites-available/default
+
+	server {
+	    listen 80 default_server;
+	    listen [::]:80 default_server;
+
+	    root /var/www/html;
+	    index index.php index.html index.htm index.nginx-debian.html;
+
+	    server_name server_domain_or_IP;
+
+	    location / {
+		try_files $uri $uri/ =404;
+	    }
+
+	    location ~ \.php$ {
+		include snippets/fastcgi-php.conf;
+		fastcgi_pass unix:/run/php/php7.0-fpm.sock;
+	    }
+
+	    location ~ /\.ht {
+		deny all;
+	    }
+	}
+
+When you've made the above changes, you can save and close the file.
+Test your configuration file for syntax errors by typing:
+
+	sudo nginx -t
+
+If any errors are reported, go back and recheck your file before continuing.
+
+When you are ready, reload Nginx to make the necessary changes:
+
+sudo systemctl reload nginx
 
 *******
-License
+Configuration Database
 *******
 
-Please see the `license
-agreement <https://github.com/bcit-ci/CodeIgniter/blob/develop/user_guide_src/source/license.rst>`_.
+CodeIgniter has a config file that lets you store your database connection values (username, password, database name, etc.). The config file is located at application/config/database.php. You can also set database connection values for specific environments by placing database.php in the respective environment config folder.
 
-*********
-Resources
-*********
+The config settings are stored in a multi-dimensional array with this prototype:
 
--  `User Guide <https://codeigniter.com/docs>`_
--  `Language File Translations <https://github.com/bcit-ci/codeigniter3-translations>`_
--  `Community Forums <http://forum.codeigniter.com/>`_
--  `Community Wiki <https://github.com/bcit-ci/CodeIgniter/wiki>`_
--  `Community Slack Channel <https://codeigniterchat.slack.com>`_
 
-Report security issues to our `Security Panel <mailto:security@codeigniter.com>`_
-or via our `page on HackerOne <https://hackerone.com/codeigniter>`_, thank you.
+	$db['default'] = array(
 
-***************
-Acknowledgement
-***************
+		'dsn'   => '',	
 
-The CodeIgniter team would like to thank EllisLab, all the
-contributors to the CodeIgniter project and you, the CodeIgniter user.
+		'hostname' => 'ip database',
+
+		'username' => 'username database',
+
+		'password' => 'password database',
+
+		'database' => 'database_name',
+
+		'dbdriver' => 'mysqli',
+
+		'dbprefix' => '',
+
+		'pconnect' => TRUE,
+
+		'db_debug' => TRUE,
+
+		'cache_on' => FALSE,
+
+		'cachedir' => '',
+
+		'char_set' => 'utf8',
+
+		'dbcollat' => 'utf8_general_ci',
+
+		'swap_pre' => '',
+
+		'encrypt' => FALSE,
+
+		'compress' => FALSE,
+
+		'stricton' => FALSE,
+
+		'failover' => array()
+	);
+
+*******
+Configuration Path folder upload image
+*******
+
+buka file controller MyForce.php yang berada di application/controller/MyForce.php
+lalu ubah codingan 
+
+	$targetPath		 = '/opt/lampp/htdocs/myforce/assets/images/';
+Menjadi
+	$targetPath		 = 'folder server anda/myforce/assets/images/';
+	
+Lalukan hal yang sama pada ModelMyForce.php yang berada di application/model/ModelMyForce.php
+
+	$targetPath		 = '/opt/lampp/htdocs/myforce/assets/images/';
+Menjadi
+	$targetPath		 = 'folder server anda/myforce/assets/images/';
+
+
+*******
+Configuration Add Sales and Managers
+*******
+
+Buka file addsales & addmanagers yang berada di folder 
+	application/views/admin/addsales.php
+	application/views/admin/addmanagers.php
+
+*******
+Sales :
+*******
+
+lalu cari codingan yang seperti ini : 
+
+	$(function () {
+	  $('form').on('submit', function (e) {
+	    var password = document.getElementById("password").value;
+	    var cpassword = document.getElementById("cpassword").value;
+	    if(password == cpassword){
+	      e.preventDefault();
+	      $.ajax({
+		type: 'POST',
+		url: 'https://c4dd4986.ngrok.io/users',
+		data: $('form').serialize(),
+		statusCode: {
+		  201: function () {
+		    alert("Success add sales");
+		    document.getElementById("postSales").reset();
+		  },
+		  400: function () {
+		   alert("username or password already in use");
+		  }
+		}
+	      }
+	      );
+
+	    }else{
+	      e.preventDefault();
+	      document.getElementById("demo").innerHTML = "Password anda tidak sama";
+	    }
+	  });
+	});
+
+ubah pada bagian url : 
+
+	url: 'https://c4dd4986.ngrok.io/users',
+	
+menjadi url dari service myforce : 
+
+	url: 'ipaddress/users',
+	
+*******
+Managers :
+*******
+
+lalu cari codingan yang seperti ini : 
+
+	$(function () {
+	  $('form').on('submit', function (e) {
+	    var password = document.getElementById("password").value;
+	    var cpassword = document.getElementById("cpassword").value;
+	    if(password == cpassword){
+	      e.preventDefault();
+	      $.ajax({
+		type: 'POST',
+		url: 'https://bd911e75.ngrok.io/managers',
+		data: $('form').serialize(),
+		statusCode: {
+		  201: function () {
+		    alert("Success add managers");
+		    document.getElementById("postManagers").reset();
+		  },
+		  400: function () {
+		   alert("username or password already in use");
+		  }
+		}
+	      }
+	      );
+
+	    }else{
+	      e.preventDefault();
+	      document.getElementById("demo").innerHTML = "password is not the same ";
+	    }
+	  });
+	});
+
+ubah pada bagian url : 
+
+	url: 'https://c4dd4986.ngrok.io/managers',
+	
+menjadi url dari service myforce : 
+
+	url: 'ipaddress/managers',
+	
