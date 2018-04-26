@@ -165,7 +165,7 @@ $(function () {
       e.preventDefault();
       $.ajax({
         type: 'POST',
-        url: 'https://bd911e75.ngrok.io/managers',
+        url: 'http://103.65.96.216:31002/managers',
         data: $('form').serialize(),
         statusCode: {
           201: function () {

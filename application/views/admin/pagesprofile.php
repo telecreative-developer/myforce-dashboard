@@ -170,7 +170,13 @@
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                             <a class="dashboard-stat-2 bg-primary" href="#">
                                                 <div class="stat-content">
-                                                    <span class="number counter"><?php echo $result->point;?></span>
+                                                    <?php 
+                                                        $id = $this->uri->segment(2);
+                                                        $query = $this->db->query("SELECT SUM(point) as total FROM points WHERE id='$id'");
+                                                        $row = $query->row();
+                                                        $point = $row->total;
+                                                    ?>
+                                                    <span class="number counter"><?php echo $point;?></span>
                                                     <span class="name">Points</span>
                                                 </div>
                                             </a>

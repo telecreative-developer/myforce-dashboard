@@ -3,7 +3,7 @@
 ?>
     <body class="">
         <div class="main-wrapper">
-            <div class="login-bg-color bg-primary">
+            <div class="login-bg-color">
                 <div class="row">
                     <div class="col-md-4 col-md-offset-4">
                         <div class="panel login-box">
@@ -24,7 +24,7 @@
                                 	</div>
                                     <div class="form-group mt-20">
                                         <div class="">
-                                            <button type="submit" class="btn btn-success btn-labeled pull-right">Sign in<span class="btn-label btn-label-right"><i class="fa fa-check"></i></span></button>
+                                            <button type="submit" class="btn btn-primary btn-labeled pull-right">Sign in</button>
                                             <div class="clearfix"></div>
                                         </div>
                                     </div>

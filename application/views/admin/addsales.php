@@ -183,7 +183,7 @@ $(function () {
       e.preventDefault();
       $.ajax({
         type: 'POST',
-        url: 'https://c4dd4986.ngrok.io/users',
+        url: 'http://103.65.96.216:31001/users',
         data: $('form').serialize(),
         statusCode: {
           201: function () {

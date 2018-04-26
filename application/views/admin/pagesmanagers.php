@@ -178,21 +178,7 @@
                                 <!-- /.col-md-3 -->
 
                                 <div class="col-md-7">
-
-                                    <div class="row mb-30">
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                            <a class="dashboard-stat-2 bg-pinkpoints" href="#">
-                                                <div class="stat-content">
-                                                    <span class="number counter"><?php echo $result->point;?></span>
-                                                    <span class="name">Points</span>
-                                                </div>
-                                            </a>
-                                            <!-- /.dashboard-stat-2 -->
-                                        </div>
-                                        <!-- /.col-lg-3 col-md-3 col-sm-6 col-xs-12 -->
-                                    </div>
                                     <!-- /.row -->
-
                                     <ul class="nav nav-tabs nav-justified" role="tablist">
                                 	</ul>
                                   <div class="tab-content bg-white p-15">
