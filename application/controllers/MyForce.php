@@ -81,21 +81,25 @@ class MyForce extends CI_Controller {
     $timenow = date("H:i:s");
   
     $id = $this->uri->segment(2);
-    $target_revenue_month             = $this->input->post('target_revenue_month');
-    $target_revenue_year              = $this->input->post('target_revenue_year');
-    $target_unit_pipeline_month       = $this->input->post('target_unit_pipeline_month');
-    $target_unit_pipeline_year        = $this->input->post('target_unit_pipeline_year');
-    $year                             = $this->input->post('year');
-    $hit_rate                         = $this->input->post('hit_rate');
+    $actual_revenue_month           = $this->input->post('actual_revenue_month');
+    $actual_revenue_year            = $this->input->post('actual_revenue_year');
+    $actual_unit_month              = $this->input->post('actual_unit_month');
+    $actual_unit_year               = $this->input->post('actual_unit_year');
+    $pipeline_unit_month            = $this->input->post('pipeline_unit_month');
+    $pipeline_revenue_month         = $this->input->post('pipeline_revenue_month');
+    $year                           = $this->input->post('year');
+    $hit_rate                       = $this->input->post('hit_rate');
     
 		$data = array(
-      'target_revenue_month'        => $target_revenue_month,
-      'target_revenue_year'         => $target_revenue_year,
-      'target_unit_pipeline_month'  => $target_unit_pipeline_month,
-      'target_unit_pipeline_year'   => $target_unit_pipeline_year,
-      'year'                        => $year,
-      'hit_rate'                    => $hit_rate,
-      'updatedAt'		                => $datenow." ".$timenow
+      'actual_revenue_month'          => $actual_revenue_month,
+      'actual_revenue_year'       		=> $actual_revenue_year,
+      'actual_unit_month'  	          => $actual_unit_month,
+      'actual_unit_year'              => $actual_unit_year,
+      'pipeline_unit_month'           => $pipeline_unit_month,
+      'pipeline_revenue_month'        => $pipeline_revenue_month,
+      'year'                          => $year,
+      'hit_rate'                      => $hit_rate,
+      'updatedAt'		                  => $datenow." ".$timenow
 		);
 		
 		$where = array(
@@ -515,13 +519,6 @@ class MyForce extends CI_Controller {
     </script>");
   }
 
-
-  public function sales()
-	{
-    $data['sales']  = $this->ModelMyForce->LoadSales()->result();
-		$this->load->view('admin/table-sales',$data);
-  }
-
   public function pagesprofile()
 	{
     $id = $this->uri->segment(2);
@@ -536,17 +533,25 @@ class MyForce extends CI_Controller {
 		$this->load->view('admin/addsales',$data);
   }
 
+  public function sales()
+  {
+    $data['sales'] = $this->ModelMyForce->getSales()->result();
+    $this->load->view('admin/table-sales', $data);
+  }
+
   public function addtarget()
   {
-    $data['sales'] = $this->ModelMyForce->LoadSales()->result();
+    $data['sales'] = $this->ModelMyForce->loadSales()->result();
     $this->load->view('admin/addtarget', $data);
   }
 
   public function insertTarget(){
-    $target_revenue_month           = $this->input->post('target_revenue_month');
-    $target_revenue_year            = $this->input->post('target_revenue_year');
-    $target_unit_pipeline_month     = $this->input->post('target_unit_pipeline_month');
-    $target_unit_pipeline_year      = $this->input->post('target_unit_pipeline_year');
+    $actual_revenue_month           = $this->input->post('actual_revenue_month');
+    $actual_revenue_year            = $this->input->post('actual_revenue_year');
+    $actual_unit_month              = $this->input->post('actual_unit_month');
+    $actual_unit_year               = $this->input->post('actual_unit_year');
+    $pipeline_unit_month            = $this->input->post('pipeline_unit_month');
+    $pipeline_revenue_month         = $this->input->post('pipeline_revenue_month');
     $year                           = $this->input->post('year');
     $id                             = $this->input->post('id');
     $hit_rate                       = $this->input->post('hit_rate');
@@ -555,10 +560,12 @@ class MyForce extends CI_Controller {
     $timenow = date("h:i:s");
 
     $targets = array(
-      'target_revenue_month'          => $target_revenue_month,
-      'target_revenue_year'       		=> $target_revenue_year,
-      'target_unit_pipeline_month'  	=> $target_unit_pipeline_month,
-      'target_unit_pipeline_year'     => $target_unit_pipeline_year,
+      'actual_revenue_month'          => $actual_revenue_month,
+      'actual_revenue_year'       		=> $actual_revenue_year,
+      'actual_unit_month'  	          => $actual_unit_month,
+      'actual_unit_year'              => $actual_unit_year,
+      'pipeline_unit_month'           => $pipeline_unit_month,
+      'pipeline_revenue_month'        => $pipeline_revenue_month,
       'year'                          => $year,
       'id'                            => $id,
       'hit_rate'                      => $hit_rate,

@@ -116,8 +116,8 @@
                                                             <td><?php echo $result->no_rek;?></td>
                                                             <!-- <td><?php echo $result->address;?></td> -->
                                                             <td><?php echo $result->point;?> Points</td>
-                                                            <td><?php echo $result->target_unit_pipeline_month ?></td>
-                                                            <td><?php echo $result->target_revenue_month;?></td>
+                                                            <td><?php echo $result->pipeline_unit_month ?></td>
+                                                            <td><?php echo $result->pipeline_revenue_month;?></td>
                                                             <td><?php echo $result->hit_rate;?></td>
                                                             <td>
                                                                 <a href="<?php echo base_url();?>editsales/<?php echo $result->id;?>"><button type="button" class="btn btn-primary btn-xs btn-labeled"><i class="fa fa-pencil"></i></button></a>

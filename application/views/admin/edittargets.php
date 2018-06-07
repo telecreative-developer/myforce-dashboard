@@ -59,26 +59,38 @@
                                             <?php foreach($targets as $result){?>
                                                 <form method="POST" action="<?php echo base_url()?>updateTargets/<?php echo $result->id_target;?>" class="form-horizontal">
                                                     <div class="form-group">
-                                                      <label for="text1" class="col-sm-2 control-label">Target Pipeline Unit Monthly</label>
+                                                      <label for="text1" class="col-sm-2 control-label">Actual Revenue Monthly</label>
                                                       <div class="col-sm-4">
-                                                        <input type="number" name="target_unit_pipeline_month" class="form-control" id="target-month" value="<?php echo $result->target_unit_pipeline_month;?>" placeholder="Target Pipeline Unit Monthly">
+                                                        <input type="number" name="actual_revenue_month" class="form-control" id="target-month" value="<?php echo $result->actual_revenue_month;?>" placeholder="Actual Revenue Monthly">
                                                       </div>
 
-                                                      <label for="text1" class="col-sm-2 control-label">Target Pipeline Unit Yearly</label>
+                                                      <label for="text1" class="col-sm-2 control-label">Actual Revenue Yearly</label>
                                                       <div class="col-sm-4">
-                                                        <input type="number" name="target_unit_pipeline_year" class="form-control" id="target-year" value="<?php echo $result->target_unit_pipeline_year;?>" placeholder="Target Pipeline Unit Monthly">
+                                                        <input type="number" name="actual_revenue_year" class="form-control" id="target-year" value="<?php echo $result->actual_revenue_year;?>" placeholder="Actual Revenue Yearly">
                                                       </div>
                                                     </div>
 
                                                     <div class="form-group">
-                                                      <label for="text1" class="col-sm-2 control-label">Target Pipeline Revenue Monthly</label>
+                                                      <label for="text1" class="col-sm-2 control-label">Actual Unit Monthly</label>
                                                       <div class="col-sm-4">
-                                                        <input type="number" name="target_revenue_month" class="form-control" id="target-revenue-month" value="<?php echo $result->target_revenue_month;?>" placeholder="Target Revenue Month">
+                                                        <input type="number" name="actual_unit_month" class="form-control" id="target-revenue-month" value="<?php echo $result->actual_unit_month;?>" placeholder="Actual Unit Monthly">
                                                       </div>
 
-                                                      <label for="text1" class="col-sm-2 control-label">Target Pipeline Revenue Yearly</label>
+                                                      <label for="text1" class="col-sm-2 control-label">Actual Unit Yearly</label>
                                                       <div class="col-sm-4">
-                                                        <input type="number" name="target_revenue_year" class="form-control" id="target-revenue-year" value="<?php echo $result->target_revenue_year;?>" placeholder="Target Revenue Year">
+                                                        <input type="number" name="actual_unit_year" class="form-control" id="target-revenue-year" value="<?php echo $result->actual_unit_year;?>" placeholder="Target Revenue Year">
+                                                      </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                      <label for="text1" class="col-sm-2 control-label">Pipeline Unit Monthly</label>
+                                                      <div class="col-sm-4">
+                                                        <input type="number" name="pipeline_unit_month" class="form-control" id="target-revenue-month" value="<?php echo $result->pipeline_unit_month;?>" placeholder="Pipeline Unit Monthly">
+                                                      </div>
+
+                                                      <label for="text1" class="col-sm-2 control-label">pipeline Revenue Monthly</label>
+                                                      <div class="col-sm-4">
+                                                        <input type="number" name="pipeline_revenue_month" class="form-control" id="target-revenue-year" value="<?php echo $result->pipeline_revenue_month;?>" placeholder="Pipeline Revenue Monthly">
                                                       </div>
                                                     </div>
 

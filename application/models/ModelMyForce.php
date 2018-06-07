@@ -277,8 +277,13 @@ Class ModelMyForce extends CI_Model{
   }
 
   public function loadSales(){
-    $this->db->join('targets', 'targets.id = users.id');
-		$this->db->order_by('users.id','desc');
+		$db = $this->db->get('users');
+		return $db;
+  }
+
+  public function getSales(){
+    $this->db->join('targets', 'targets.id = users.id' , 'left');
+    $this->db->order_by('users.id', 'desc');
 		$db = $this->db->get('users');
 		return $db;
   }

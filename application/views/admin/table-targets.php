@@ -65,10 +65,12 @@
                                                         <tr>
                                                             <th width="3%">No</th>
                                                             <th>Name Sales</th>
-                                                            <th>Target Pipeline Unit Monthly</th>
-                                                            <th>Target Pipeline Unit Yearly</th>
-                                                            <th>Target Pipeline Revenue Monthly</th>
-                                                            <th>Target Pipeline Revenue Yearly</th>
+                                                            <th>Actual Revenue Monthly</th>
+                                                            <th>Actual Revenue Yearly</th>
+                                                            <th>Actual Unit Monthly</th>
+                                                            <th>Actual Unit Yearly</th>
+                                                            <th>Pipeline Unit Monthly</th>
+                                                            <th>Pipeline Revenue Monthly</th>
                                                             <th>Hit Rate </th>
                                                             <th>Year</th>
                                                             <th>Action</th>
@@ -83,10 +85,12 @@
                                                         <tr>
                                                             <td><?php echo $no;?></td>
                                                             <td><?php echo $result->first_name?> <?php echo $result->last_name?></td>
-                                                            <td><?php echo $result->target_unit_pipeline_month;?></td>
-                                                            <td><?php echo $result->target_unit_pipeline_year;?></td>
-                                                            <td><?php echo $result->target_revenue_month;?></td>
-                                                            <td><?php echo $result->target_revenue_year;?></td>
+                                                            <td><?php echo $result->actual_revenue_month;?></td>
+                                                            <td><?php echo $result->actual_revenue_year;?></td>
+                                                            <td><?php echo $result->actual_unit_month;?></td>
+                                                            <td><?php echo $result->actual_unit_year;?></td>
+                                                            <td><?php echo $result->pipeline_unit_month; ?></td>
+                                                            <td><?php echo $result->pipeline_revenue_month?></td>
                                                             <td><?php echo $result->hit_rate ?></td>
                                                             <td><?php echo $result->year;?></td>
                                                             <td>
