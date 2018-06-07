@@ -81,19 +81,21 @@ class MyForce extends CI_Controller {
     $timenow = date("H:i:s");
   
     $id = $this->uri->segment(2);
-    $target_month             = $this->input->post('target_month');
-    $target_year              = $this->input->post('target_year');
-    $target_revenue_month     = $this->input->post('target_revenue_month');
-    $target_revenue_year      = $this->input->post('target_revenue_year');
-    $year                     = $this->input->post('year');
+    $target_revenue_month             = $this->input->post('target_revenue_month');
+    $target_revenue_year              = $this->input->post('target_revenue_year');
+    $target_unit_pipeline_month       = $this->input->post('target_unit_pipeline_month');
+    $target_unit_pipeline_year        = $this->input->post('target_unit_pipeline_year');
+    $year                             = $this->input->post('year');
+    $hit_rate                         = $this->input->post('hit_rate');
     
 		$data = array(
-      'target_month'           => $target_month,
-      'target_year'            => $target_year,
-      'target_revenue_month'   => $target_revenue_month,
-      'target_revenue_year'    => $target_revenue_year,
-      'year'                   => $year,
-      'updatedAt'		           => $datenow." ".$timenow
+      'target_revenue_month'        => $target_revenue_month,
+      'target_revenue_year'         => $target_revenue_year,
+      'target_unit_pipeline_month'  => $target_unit_pipeline_month,
+      'target_unit_pipeline_year'   => $target_unit_pipeline_year,
+      'year'                        => $year,
+      'hit_rate'                    => $hit_rate,
+      'updatedAt'		                => $datenow." ".$timenow
 		);
 		
 		$where = array(
@@ -533,6 +535,67 @@ class MyForce extends CI_Controller {
     // $data['regions']  = $this->ModelMyForce->LoadRegions()->result();
 		$this->load->view('admin/addsales',$data);
   }
+
+  public function addtarget()
+  {
+    $data['sales'] = $this->ModelMyForce->LoadSales()->result();
+    $this->load->view('admin/addtarget', $data);
+  }
+
+  public function insertTarget(){
+    $target_revenue_month           = $this->input->post('target_revenue_month');
+    $target_revenue_year            = $this->input->post('target_revenue_year');
+    $target_unit_pipeline_month     = $this->input->post('target_unit_pipeline_month');
+    $target_unit_pipeline_year      = $this->input->post('target_unit_pipeline_year');
+    $year                           = $this->input->post('year');
+    $id                             = $this->input->post('id');
+    $hit_rate                       = $this->input->post('hit_rate');
+
+    $datenow = date("Y-m-d");
+    $timenow = date("h:i:s");
+
+    $targets = array(
+      'target_revenue_month'          => $target_revenue_month,
+      'target_revenue_year'       		=> $target_revenue_year,
+      'target_unit_pipeline_month'  	=> $target_unit_pipeline_month,
+      'target_unit_pipeline_year'     => $target_unit_pipeline_year,
+      'year'                          => $year,
+      'id'                            => $id,
+      'hit_rate'                      => $hit_rate,
+      'createdAt'		                  => $datenow." ".$timenow,
+      'updatedAt'		                  => $datenow." ".$timenow
+    );
+
+     $this->ModelMyForce->insertTarget($targets); 
+     echo ("<script LANGUAGE='JavaScript'>
+     window.alert('Success Data');
+     window.location.href='targets';
+     </script>");
+  }
+
+  // public function insertProducts(){
+  //   $target_month         = $this->input->post('target_month');
+  //   $target_year   = $this->input->post('target_year');
+    
+
+  //   $datenow = date("Y-m-d");
+  //   $timenow = date("h:i:s");
+
+  //   $products = array(
+  //     'product'  			  => $title,
+  //     'picture'		      => $imageUrl."assets/images/products/".$fileName,
+  //     'loc_picture'		  => $fileName,
+  //     'description'  		=> $description,
+  //     'createdAt'		    => $datenow." ".$timenow,
+  //     'updatedAt'		    => $datenow." ".$timenow
+  //   );
+
+  //   $this->ModelMyForce->insertProducts($products); 
+  //   echo ("<script LANGUAGE='JavaScript'>
+  //    window.alert('Success Data');
+  //    window.location.href='products';
+  //    </script>");
+  // }  
 
   public function insertSales(){
     

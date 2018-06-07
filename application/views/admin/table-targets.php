@@ -56,6 +56,7 @@
                                             <div class="panel-heading">
                                                 <div class="panel-title">
                                                     <h5>Targets </h5>
+                                                    <a href="<?php echo base_url()?>addtarget"><button type="button" class="btn btn-primary btn-xs btn-labeled">Add Target <i class="fa fa-plus"></i></button></a>
                                                 </div>
                                             </div>
                                             <div class="panel-body p-20">
@@ -63,10 +64,12 @@
                                                     <thead>
                                                         <tr>
                                                             <th width="3%">No</th>
-                                                            <th>Target Month</th>
-                                                            <th>Target Year</th>
-                                                            <th>Target Revenue Month</th>
-                                                            <th>Target Revenue Year</th>
+                                                            <th>Name Sales</th>
+                                                            <th>Target Pipeline Unit Monthly</th>
+                                                            <th>Target Pipeline Unit Yearly</th>
+                                                            <th>Target Pipeline Revenue Monthly</th>
+                                                            <th>Target Pipeline Revenue Yearly</th>
+                                                            <th>Hit Rate </th>
                                                             <th>Year</th>
                                                             <th>Action</th>
                                                         </tr>
@@ -79,10 +82,12 @@
                                                         ?>
                                                         <tr>
                                                             <td><?php echo $no;?></td>
-                                                            <td><?php echo $result->target_month;?></td>
-                                                            <td><?php echo $result->target_year;?></td>
+                                                            <td><?php echo $result->first_name?> <?php echo $result->last_name?></td>
+                                                            <td><?php echo $result->target_unit_pipeline_month;?></td>
+                                                            <td><?php echo $result->target_unit_pipeline_year;?></td>
                                                             <td><?php echo $result->target_revenue_month;?></td>
                                                             <td><?php echo $result->target_revenue_year;?></td>
+                                                            <td><?php echo $result->hit_rate ?></td>
                                                             <td><?php echo $result->year;?></td>
                                                             <td>
                                                                 <a href="<?php echo base_url();?>edit-targets/<?php echo $result->id_target;?>"><button type="button" class="btn btn-primary btn-xs btn-labeled"><i class="fa fa-pencil"></i></button></a>

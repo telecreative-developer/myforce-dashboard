@@ -71,7 +71,10 @@
                                                             <th>Bank</th>
                                                             <th>No Rek</th>
                                                             <!-- <th>Address</th> -->
-                                                            <th>Points</th>
+                                                            <th>Point</th>
+                                                            <th>Target Pipeline Unit Monthly</th>
+                                                            <th>Target Pipeline Revenue Monthly</th>
+                                                            <th>Hit Rate</th>
                                                             <th width="3%">Action</th>
                                                         </tr>
                                                     </thead>
@@ -113,6 +116,9 @@
                                                             <td><?php echo $result->no_rek;?></td>
                                                             <!-- <td><?php echo $result->address;?></td> -->
                                                             <td><?php echo $result->point;?> Points</td>
+                                                            <td><?php echo $result->target_unit_pipeline_month ?></td>
+                                                            <td><?php echo $result->target_revenue_month;?></td>
+                                                            <td><?php echo $result->hit_rate;?></td>
                                                             <td>
                                                                 <a href="<?php echo base_url();?>editsales/<?php echo $result->id;?>"><button type="button" class="btn btn-primary btn-xs btn-labeled"><i class="fa fa-pencil"></i></button></a>
                                                                 <a onclick="javascript:return confirm('Delete ?')" href="<?php echo base_url();?>deleteSales/<?php echo $result->id;?>"><button type="button" class="btn btn-danger btn-xs btn-labeled"><i class="fa fa-remove"></i></button></a>

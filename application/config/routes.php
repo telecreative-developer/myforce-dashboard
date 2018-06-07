@@ -59,6 +59,8 @@ $route['dashboard']    = 'MyForce/dashboard';
 
 //Route Targets
 $route['targets']       = 'MyForce/targets';
+$route['addtarget']     = 'MyForce/addtarget';
+$route['insertTarget']  = 'MyForce/insertTarget';
 $route['edit-targets/:any']   = 'MyForce/editTargets';
 $route['updateTargets/:any'] = 'MyForce/updateTargets';
 

@@ -36,8 +36,9 @@ Class ModelMyForce extends CI_Model{
       return false;
     }
      
-  public function LoadTargetsById($id){
-		$this->db->where('id_target',$id);
+  public function LoadTargetsById($id_target){
+    $this->db->join('users', 'users.id = targets.id');
+		$this->db->where('id_target',$id_target);
     $db =$this->db->get('targets');
     return $db;
   }
@@ -50,11 +51,17 @@ Class ModelMyForce extends CI_Model{
   public function insertEvents($events){
 		$this->db->insert('events',$events);
   }
+
+  public function insertTarget($targets)
+  {
+    $this->db->insert('targets', $targets);
+  }
   
-  public function loadTargets(){
-		$this->db->order_by('id_target','desc');
-		$db = $this->db->get('targets');
-		return $db;
+  public function loadTargets(){  
+    $this->db->join('users', 'users.id = targets.id');
+    $db = $this->db->get('targets');
+    return $db;
+
   }
 
   public function loadEvents(){
@@ -270,7 +277,8 @@ Class ModelMyForce extends CI_Model{
   }
 
   public function loadSales(){
-		$this->db->order_by('id','desc');
+    $this->db->join('targets', 'targets.id = users.id');
+		$this->db->order_by('users.id','desc');
 		$db = $this->db->get('users');
 		return $db;
   }
