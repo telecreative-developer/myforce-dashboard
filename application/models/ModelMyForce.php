@@ -290,7 +290,6 @@ Class ModelMyForce extends CI_Model{
 
   public function LoadSalesById($id){
     $this->db->where('users.id',$id);
-    $this->db->join('branches','branches.id_branch = users.id_branch');
     $db =$this->db->get('users');
     return $db;
   }
@@ -373,12 +372,22 @@ Class ModelMyForce extends CI_Model{
 		$this->db->where($where);
 		$this->db->update($table,$data);
   }
+
+  public function updateSalesById($where,$data,$table){
+    $this->db->where($where);
+    $this->db->update($table,$data);
+  }
   
   public function loadBranches(){
     $this->db->join('managers','managers.id_manager = branches.id_manager');
 		$this->db->order_by('branches.branch','asc');
 		$db = $this->db->get('branches');
 		return $db;
+  }
+
+  public function loadBranch(){
+    $db = $this->db->get('branches');
+    return $db;
   }
   
   public function insertBranches($regions){

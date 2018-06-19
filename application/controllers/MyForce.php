@@ -653,18 +653,23 @@ class MyForce extends CI_Controller {
     //  </script>");
   }
 
-  public function editSales()
+  public function editsales()
 	{
     $id = $this->uri->segment(2);
-
-    $query = $this->db->query("SELECT * FROM users WHERE id = $id");
-    $row = $query->row();
-
-    $id_branch = $row->id_branch;
-
-    $data['branch']  = $this->ModelMyForce->LoadBranchNotById($id_branch)->result();
+    $data['branch']  = $this->ModelMyForce->loadBranch()->result();
     $data['sales'] = $this->ModelMyForce->LoadSalesById($id)->result();
 		$this->load->view('admin/editsales',$data);
+
+    // $id = $this->uri->segment(2);
+
+    // $query = $this->db->query("SELECT * FROM users WHERE id = $id");
+    // $row = $query->row();
+
+    // $id_branch = $row->id_branch;
+
+    // $data['branch']  = $this->ModelMyForce->LoadBranchNotById($id_branch)->result();
+    // $data['sales'] = $this->ModelMyForce->LoadSalesById($id)->result();
+		// $this->load->view('admin/editsales',$data);
   }
 
   public function updateSales() {
@@ -672,24 +677,30 @@ class MyForce extends CI_Controller {
     $timenow = date("H:i:s");
   
     $id = $this->uri->segment(2);
-    // $firstname            = $this->input->post('firstname');
-    // $lastname             = $this->input->post('lastname');
-    // $phone                = $this->input->post('phone');
-    // $gender               = $this->input->post('gender');
+    $username             = $this->input->post('username');
+    $first_name           = $this->input->post('first_name');
+    $email                = $this->input->post('email');
+    $last_name            = $this->input->post('last_name');
+    $phone                = $this->input->post('phone');
+    $gender               = $this->input->post('gender');
     $branch               = $this->input->post('branch');
-    // $bank                 = $this->input->post('bank');
-    // $norek                = $this->input->post('norek');
-    // $address              = $this->input->post('address');
+    $bank_name            = $this->input->post('bank_name');
+    $no_rek                = $this->input->post('no_rek');
+    $address              = $this->input->post('address');
+    $id_branch            = $this->input->post('id_branch');
     
 		$data = array(
-      // 'first_name'        => $firstname,
-      // 'last_name'         => $lastname,
-      // 'phone'             => $phone,
-      // 'gender'            => $gender,
+      'username'          => $username,
+      'id_branch'         => $id_branch,
+      'first_name'        => $first_name,
+      'last_name'         => $last_name,
+      'email'             => $email,
+      'phone'             => $phone,
+      'gender'            => $gender,
       'id_branch'         => $branch,
-      // 'bank_name'         => $bank,
-      // 'no_rek'            => $norek,
-      // 'address'           => $address,
+      'bank_name'         => $bank_name,
+      'no_rek'            => $no_rek,
+      'address'           => $address,
       'updatedAt'		      => $datenow." ".$timenow
 		);
 		
@@ -697,7 +708,7 @@ class MyForce extends CI_Controller {
 			'id' => $id
     );
     
-    $this->ModelMyForce->updateTeamsById($where,$data,'users');
+    $this->ModelMyForce->updateSalesById($where,$data,'users');
 		echo ("<script LANGUAGE='JavaScript'>
      window.alert('Update Data');
      window.location.href='../sales';
